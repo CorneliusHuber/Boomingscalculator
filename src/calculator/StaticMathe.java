@@ -1,4 +1,4 @@
-package Recheneinheit;
+package calculator;
 
 public class StaticMathe {
 	

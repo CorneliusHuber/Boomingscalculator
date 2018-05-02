@@ -1,6 +1,6 @@
 package analysis;
 
-import Recheneinheit.NichtRechenbarException;
+import calculator.NichtRechenbarException;
 
 public class Root extends Term {
 
@@ -87,11 +87,11 @@ public class Root extends Term {
 
 		if (nte == null) {
 			
-			result = Recheneinheit.StaticMathe.wurzelziehen(result, 5) * algebraicSign;
+			result = calculator.StaticMathe.wurzelziehen(result, 5) * algebraicSign;
 			
 		} else {
 			
-			result = Recheneinheit.StaticMathe.wurzelziehen(result, 5, (int) nte.calculate());
+			result = calculator.StaticMathe.wurzelziehen(result, 5, (int) nte.calculate());
 			
 		}
 		

@@ -1,4 +1,4 @@
-package Recheneinheit;
+package calculator;
 
 import analysis.*;
 import analysis.Number;
