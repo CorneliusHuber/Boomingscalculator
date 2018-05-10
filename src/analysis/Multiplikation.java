@@ -64,7 +64,6 @@ public class Multiplikation extends Term {
 
 		}
 
-		genParts();
 		unindent();
 
 	}

@@ -118,7 +118,7 @@ public class Term implements Outputable {
 			return stringTerm;
 
 		} else {
-
+ 
 			return "Error: stringTerm == null. (This should never happen. :()";
 
 		}
@@ -176,7 +176,7 @@ public class Term implements Outputable {
 	private void delWhiteSpaces() {
 
 		stringTerm = sU.removeall(stringTerm, ' ');
-	     <one line to give the program's name and a brief idea of what it does.>
+		
 	}
 
 	public double calculate() {
