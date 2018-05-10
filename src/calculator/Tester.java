@@ -32,6 +32,8 @@ public class Tester implements Outputable {
 
 	public static void main(String args[]) {
 		
+		Output.setextendedlog(true);
+		outputingArgsTest(args);
 		long timebegin = System.nanoTime();
 		Tester te = new Tester();
 		long timeend = System.nanoTime();
@@ -231,6 +233,18 @@ public class Tester implements Outputable {
 		
 		re = new Parenthesis("24");
 		System.out.println(re instanceof Parenthesis);
+		
+	}
+	
+	public static void outputingArgsTest(String [] args) {
+		
+		Output.printlog("Here comes the \"ARG.\" ");
+		
+		for (int i = 0; i < args.length; i++) {
+			
+			Output.printlog(args[i]);
+			
+		}
 		
 	}
 

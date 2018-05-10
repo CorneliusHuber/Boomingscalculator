@@ -27,11 +27,21 @@ public class Commandline {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String args[]) {
+		
+		for (int i = 0; i < args.length; i++) {
+			
+			if (args[i].equals("--verbose")) {
+				
+				Output.setextendedlog(true);
+				
+			}
+			
+		}
 
-		System.out.println("BoomingsCalculator");
-		System.out.println("v0.1.0 beta");
+		System.out.println("Thank you for using BoomingsCalculator.");
+		System.out.println("This is version 1.0.0");
 
-		System.out.println("Do you want to type a term? [Y/N]");
+		System.out.println("Do you want to calculate something? [Y/N]");
 		String input = sc.nextLine();
 		
 		if (input.equals("y") || input.equals("Y")) {
@@ -52,7 +62,7 @@ public class Commandline {
 
 			System.out.println();
 			System.out.println();
-			System.out.println("Please write term.");
+			System.out.println("Please write a calculation.");
 			String input = sc.nextLine();
 			System.out.println("Term: " + input);
 			Term term = new Term(input);
@@ -68,7 +78,7 @@ public class Commandline {
 
 			}
 
-			System.out.println("Do you want to type another term? [Y/N]");
+			System.out.println("Do you want to calculate another term? [Y/N]");
 			input = sc.nextLine();
 			if (!(input.equals("y") || input.equals("Y"))) {
 

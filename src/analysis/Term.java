@@ -614,7 +614,7 @@ public class Term implements Outputable {
 
 		}
 
-		printlog("feddig.");
+		printlog("feddig.");  //German dialect, states that the method has finished.
 
 	}
 }

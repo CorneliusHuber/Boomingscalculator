@@ -20,7 +20,7 @@ package iOStreams;
 
 public class Output{
 
-	private static boolean extendedlog = true;
+	private static boolean extendedlog = false;
 	private static int leerzeichen = 0;
 	private static int einrueckung = 5;
 	
