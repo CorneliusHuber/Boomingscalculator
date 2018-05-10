@@ -1,5 +1,5 @@
 # BoomingsCalculator
-As I have been bored and needed to learn Java I started this as a fun little hobby project to practice a bit. This was December 2016. Now it is 2018 and I can actually calculate something with it. Well, actually I can do so since summer this year. This project started out in German, so I am translating it right now to English. 
+As I have been bored and needed to learn Java I started this as a fun little hobby project to practice a bit. This was in December 2016. Now it is 2018 and I can actually calculate something with it. Well, actually I can do so since summer this year. This project started out in German, so I am translating it right now to English. 
 
 Right now these features are implemented: 
 
