@@ -23,8 +23,6 @@ import analysis.Term;
 
 public class Starter {
 	
-	private static boolean log = true;
-
 	public static void main(String args[]) {
 		try {
 

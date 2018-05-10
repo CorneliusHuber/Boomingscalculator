@@ -22,12 +22,13 @@ import analysis.*;
 import analysis.Number;
 import iOStreams.*;
 
+@SuppressWarnings("unused")
 public class Tester implements Outputable {
 
-	private boolean log = true;
 	Analysator ana = new Analysator();
 	Term re;
 	StringUtils su = new StringUtils();
+
 
 	public static void main(String args[]) {
 		
@@ -45,7 +46,6 @@ public class Tester implements Outputable {
 	}
 
 	private void todo() {
-		// TODO hier alles, was zu tun ist rein.
 		ana = new Analysator();
 		ana.isSinCosTan("sin(4)", 0);
 
@@ -56,7 +56,6 @@ public class Tester implements Outputable {
 		re = new Term("277/77");
 		re.calculate();
 		
-		//Hier gibt es einen Fehler.
 		
 	}
 
@@ -68,12 +67,6 @@ public class Tester implements Outputable {
 		ana.testEverything(rechnung);
 		re = new Term(rechnung);
 		re.calculate();
-		
-		/*
-		 * Testbericht: 
-		 * Fehler bei testEnde(). Am Ende wurde fälschlicherweise false
-		 * zurückgegeben, obwohl eigentlich alles gepasst hat.
-		 */
 
 	}
 
@@ -84,13 +77,6 @@ public class Tester implements Outputable {
 		//ana.testeAlles(rechnung);
 		re = new Term(rechnung);
 		re.calculate();
-		
-		/*
-		 * Testbericht:
-		 * Fehler bei testArithmOp: lastOp wurde zu schnell auf true gesetzt.
-		 * Fehler bei testAnfang: Eine neue Methode wurde gemacht, istFuntion();
-		 * testeFuntktion funktioniert nicht ganz, muss gefixt werden.
-		 */
 
 	}
 

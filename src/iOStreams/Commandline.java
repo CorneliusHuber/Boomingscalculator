@@ -24,57 +24,55 @@ import analysis.Term;
 
 public class Commandline {
 	
-	private static boolean log = true;
-
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String args[]) {
 
-		System.out.println("Boomings Taschenrechner");
+		System.out.println("BoomingsCalculator");
 		System.out.println("v0.1.0 beta");
 
-		System.out.println("Wollen sie eine Rechnung eingeben? [J/N]");
-		String eing = sc.nextLine();
+		System.out.println("Do you want to type a term? [Y/N]");
+		String input = sc.nextLine();
 		
-		if (eing.equals("J") || eing.equals("j")) {
+		if (input.equals("y") || input.equals("Y")) {
 
-			eingabe();
+			inputPhase();
 
 		}
 
-		System.out.println("Programm beendet. ");
+		System.out.println("Program terminated. ");
 
 	}
 
-	public static void eingabe() {
+	public static void inputPhase() {
 
-		boolean weitermachen = true;
+		boolean continuing = true;
 
-		while (weitermachen) {
+		while (continuing) {
 
 			System.out.println();
 			System.out.println();
-			System.out.println("Bitte geben sie ihre Rechnung ein.");
-			String s = sc.nextLine();
-			System.out.println("Rechnung: " + s);
-			Term r = new Term(s);
+			System.out.println("Please write term.");
+			String input = sc.nextLine();
+			System.out.println("Term: " + input);
+			Term term = new Term(input);
 			try {
 
-				double ergebnis = r.calculate();
-				System.out.println("Ergebnis: " +  ergebnis);
+				double result = term.calculate();
+				System.out.println("Result: " +  result);
 
 			} catch (Exception e) {
 
-				System.out.println("Uuuuups, da hat es wohl einen Fehler gegeben...");
+				System.out.println("Looks like an error occured");
 				System.out.println(e);
 
 			}
 
-			System.out.println("Wollen sie nochmal eine Rechnung eingeben? [J/N]");
-			String eing = sc.nextLine();
-			if (!(eing.equals("J") || eing.equals("j"))) {
+			System.out.println("Do you want to type another term? [Y/N]");
+			input = sc.nextLine();
+			if (!(input.equals("y") || input.equals("Y"))) {
 
-				weitermachen = false;
+				continuing = false;
 
 			}
 

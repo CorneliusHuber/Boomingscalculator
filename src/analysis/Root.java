@@ -18,8 +18,6 @@
 
 package analysis;
 
-import calculator.NichtRechenbarException;
-
 public class Root extends Term {
 
 	private Parenthesis klammer;

@@ -18,8 +18,6 @@
 
 package analysis;
 
-import iOStreams.Outputable;
-
 public class Multiplikation extends Term {
 
 	private char selection;

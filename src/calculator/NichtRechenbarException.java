@@ -18,6 +18,7 @@
 
 package calculator;
 
+@Deprecated
 public class NichtRechenbarException extends Exception {
 	
 	public NichtRechenbarException() {
