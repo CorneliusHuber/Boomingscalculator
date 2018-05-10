@@ -103,12 +103,12 @@ public class Analysator implements Outputable {
 				extext = "Error consurning the arithmetic operators.";
 				ok = false;
 
-			} else if (!testBegin(input)) {
+			} else if (!testBegining(input)) {
 
 				extext = "Error at the beginning";
 				ok = false;
 
-			} else if (!testEnd(input)) {
+			} else if (!testEnding(input)) {
 
 				extext = "Error at the ending";
 				ok = false;
@@ -133,7 +133,7 @@ public class Analysator implements Outputable {
 
 	/**
 	 * Goes through all chars of the String and collects data. the last parenthesis
-	 * is always being saved. Usual mathematics, not rocket-science.
+	 * is always being saved. Usual mathematics, no rocket-science.
 	 */
 	protected boolean testParenthesis(String input) {
 
@@ -208,7 +208,7 @@ public class Analysator implements Outputable {
 
 			char temp = input.charAt(index);
 
-			if (istArithmeticOperator(temp)) {
+			if (isArithmeticOperator(temp)) {
 
 				if (lastcharOp) {
 
@@ -291,7 +291,7 @@ public class Analysator implements Outputable {
 
 			boolean res = isSin(input, index) || isCos(input, index) || isTan(input, index);
 			if (res) {
-				printlog("passt soweit.");
+				printlog("isSinCosTan: OK.");
 			}
 			return res;
 
@@ -429,27 +429,28 @@ public class Analysator implements Outputable {
 	 * @param index
 	 * @return result
 	 */
+	@Deprecated
 	public boolean isRoot(String input, int index) {
 
 		try {
 
-			String ergebnis = input.substring(index, index + 2);
+			String res = input.substring(index, index + 2);
 
-			if (ergebnis.equals("V(")) {
+			if (res.equals("V(")) {
 
 				return true;
 
 			}
 
 			/*
-			 * Hier wird jetzt alles rausgeschmissen, was nicht zu Syntax gehört und dann
-			 * wird überprüft, ob das die Syntax ist. Schließt aber noch nicht so etwas ein:
-			 * V[5*(4+3)](
+			 * What does not happen to be barebones syntax is kicked out here to check
+			 * whether the syntax equals V(), V[]() or nothing of these
 			 */
-			ergebnis = su.stringUntilCharOrEnd(ergebnis, '(');
-			ergebnis = su.removeallbut(ergebnis, '(', '[', ']', 'V');
+			
+			res = su.stringUntilCharOrEnd(res, '(');
+			res = su.removeallbut(res, '(', '[', ']', 'V');
 
-			if (ergebnis.equals("V(") || ergebnis.equals("V[](")) {
+			if (res.equals("V(") || res.equals("V[](")) {
 
 				return true;
 
@@ -463,7 +464,7 @@ public class Analysator implements Outputable {
 
 			e.printStackTrace();
 			printlog(e);
-			printlog("Fehler bei istWurzel()");
+			printlog("Error at isRoot()");
 			return false;
 
 		}
@@ -475,7 +476,7 @@ public class Analysator implements Outputable {
 	 * 
 	 * @param input
 	 * @param index
-	 * @return reslut
+	 * @return result
 	 */
 	@Deprecated
 	public boolean isNthRoot(String input, int index) {
@@ -625,7 +626,7 @@ public class Analysator implements Outputable {
 
 	}
 
-	protected boolean istParenthesis(char tested) {
+	protected boolean isParenthesis(char tested) {
 
 		try {
 			switch (tested) {
@@ -642,7 +643,7 @@ public class Analysator implements Outputable {
 		}
 	}
 
-	public boolean istArithmeticOperator(char tested) {
+	public boolean isArithmeticOperator(char tested) {
 
 		switch (tested) {
 		case '/':
@@ -681,11 +682,11 @@ public class Analysator implements Outputable {
 
 	}
 
-	public boolean testBegin(String input) {
+	public boolean testBegining(String input) {
 
 		char temp = input.charAt(0);
 
-		if ((istArithmeticOperator(temp) && !isAlgebraicSing(temp) && !isFunction(input, 0))) {
+		if ((isArithmeticOperator(temp) && !isAlgebraicSing(temp) && !isFunction(input, 0))) {
 
 			printlog("Error at testBegin() " + temp);
 			return false;
@@ -696,13 +697,13 @@ public class Analysator implements Outputable {
 
 	}
 
-	public boolean testEnd(String input) {
+	public boolean testEnding(String input) {
 
 		char temp = input.charAt(input.length() - 1);
 
 		try {
 
-			if (istArithmeticOperator(temp)) {
+			if (isArithmeticOperator(temp)) {
 
 				printlog("Error at testEnd");
 				return false;
