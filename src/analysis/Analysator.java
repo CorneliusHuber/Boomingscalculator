@@ -1,15 +1,33 @@
+/**
+ *  This file is part of BoomingsCalculator
+ *  Copyright (C) 2018  <name of author>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see https://www.gnu.org/licenses/gpl.html.
+ */
+
 package analysis;
 
 import iOStreams.Output;
 import iOStreams.Outputable;
 
-
 /**
  * Used to analyse the syntac, mostly used in <code>Term </code>.
+ * 
  * @author blackbox
  *
  */
-public class Analysator implements Outputable{
+public class Analysator implements Outputable {
 
 	protected int openParenthesis = 0;
 	protected int closedParenthesis = 0;
@@ -26,50 +44,45 @@ public class Analysator implements Outputable{
 		su = new StringUtils();
 
 	}
-	
+
 	public void printlog() {
-		
+
 		Output.printlog();
-		
-	}
-	
-	public void printlog(char log) {
-		
-		Output.printlog(log);
-		
-	}
-	
-	public void printlog(String input) {
-		
-		Output.printlog(input);
-		
+
 	}
 
-	
+	public void printlog(char log) {
+
+		Output.printlog(log);
+
+	}
+
+	public void printlog(String input) {
+
+		Output.printlog(input);
+
+	}
+
 	public void printlog(Exception e) {
-		
+
 		Output.printlog(e);
-		
+
 	}
-	
+
 	public void printImp(String imp) {
-		
+
 		Output.printImp(imp);
-		
+
 	}
-	
+
 	public void printImp(Exception e) {
-		
+
 		Output.printImp(e);
-		
+
 	}
-	
 
 	/**
 	 * Input analysis starts with a search for potential errors.
-	 * 
-	 * ab hier folgt der Teil der Analyse der Eingabe. Anfangend mit einer
-	 * Fehlersuche.
 	 */
 	public void testEverything(String input) {
 
@@ -119,16 +132,14 @@ public class Analysator implements Outputable{
 	}
 
 	/**
-	 * Goes through all chars of the String and collects data. the last
-	 * parenthesis is always being saved. Usual mathematics, not
-	 * rocket-science.
+	 * Goes through all chars of the String and collects data. the last parenthesis
+	 * is always being saved. Usual mathematics, not rocket-science.
 	 */
 	protected boolean testParenthesis(String input) {
 
-
 		boolean firstParfound = false;
 
-		int leftParenthesis = 0;  // (
+		int leftParenthesis = 0; // (
 		int rightparenthesis = 0; // )
 		char lastParenthesis = ')';
 
@@ -183,10 +194,9 @@ public class Analysator implements Outputable{
 
 	}
 
-	
 	/**
-	 * This tests the usual arithmetic operators if they are set correctly.
-	 * Just the usual rules, two operators running are forbidden.
+	 * This tests the usual arithmetic operators if they are set correctly. Just the
+	 * usual rules, two operators running are forbidden.
 	 * 
 	 * @param input
 	 */
@@ -218,8 +228,8 @@ public class Analysator implements Outputable{
 		}
 
 		/*
-		 * If there has been no reason to break up and return false the program
-		 * will now return true to signal everything is correct.
+		 * If there has been no reason to break up and return false the program will now
+		 * return true to signal everything is correct.
 		 */
 
 		printlog("testArithmOp: OK");
@@ -228,28 +238,37 @@ public class Analysator implements Outputable{
 	}
 
 	/**
-	 * Tests whether a string contains <p>
-	 * sin( <p>
-	 * cos( <p>
-	 * tan(. <p>
+	 * Tests whether a string contains
+	 * <p>
+	 * sin(
+	 * <p>
+	 * cos(
+	 * <p>
+	 * tan(.
+	 * <p>
+	 * 
 	 * @param input
 	 * @param index
 	 * @return
 	 */
 	@Deprecated
 	public boolean testSinCosTan(String input, int index) {
-		
-		return isSinCosTan(input, index) || isSinCosTan(input, index - 1)
-				|| isSinCosTan(input, index - 2);
+
+		return isSinCosTan(input, index) || isSinCosTan(input, index - 1) || isSinCosTan(input, index - 2);
 
 	}
 
 	/**
-	 * Tests whether <p>
-	 * sin( <p>
-	 * cos( <p>
-	 * tan( <p>
+	 * Tests whether
+	 * <p>
+	 * sin(
+	 * <p>
+	 * cos(
+	 * <p>
+	 * tan(
+	 * <p>
 	 * is following after the char at index -1.
+	 * 
 	 * @param input
 	 * @param index
 	 * @return
@@ -257,9 +276,8 @@ public class Analysator implements Outputable{
 	public boolean isSinCosTan(String input, int index) {
 
 		/**
-		 * At first this is gonna test if there is 5 Characters Space after the
-		 * char at index. A term like this needs at least five chars space 
-		 * Example: sin(5)
+		 * At first this is gonna test if there is 5 Characters Space after the char at
+		 * index. A term like this needs at least five chars space Example: sin(5)
 		 */
 
 		if ((input.length() - index - 5) < 0) {
@@ -287,7 +305,6 @@ public class Analysator implements Outputable{
 		}
 	}
 
-	
 	/**
 	 * Tests whether <code> sin( </code> is starting at index.
 	 * 
@@ -311,7 +328,7 @@ public class Analysator implements Outputable{
 		}
 
 	}
-	
+
 	/**
 	 * Tests whether <code> cos( </code> is starting at index.
 	 * 
@@ -336,7 +353,6 @@ public class Analysator implements Outputable{
 
 	}
 
-	
 	/**
 	 * Tests whether <code> tan( </code> is starting at index.
 	 * 
@@ -363,11 +379,12 @@ public class Analysator implements Outputable{
 
 	/**
 	 * Tests whether <code> V( </code> is somewhere around the index.
+	 * 
 	 * @param input
 	 * @param index
 	 * @return answer
 	 */
-	@Deprecated 
+	@Deprecated
 	public boolean testRoot(String input, int index) {
 
 		String resBegin = "";
@@ -407,6 +424,7 @@ public class Analysator implements Outputable{
 
 	/**
 	 * Tests whether <code> V[]( </code> or <code> V( </code> is following at index.
+	 * 
 	 * @param input
 	 * @param index
 	 * @return result
@@ -424,9 +442,9 @@ public class Analysator implements Outputable{
 			}
 
 			/*
-			 * Hier wird jetzt alles rausgeschmissen, was nicht zu Syntax gehört
-			 * und dann wird überprüft, ob das die Syntax ist. Schließt aber
-			 * noch nicht so etwas ein: V[5*(4+3)](
+			 * Hier wird jetzt alles rausgeschmissen, was nicht zu Syntax gehört und dann
+			 * wird überprüft, ob das die Syntax ist. Schließt aber noch nicht so etwas ein:
+			 * V[5*(4+3)](
 			 */
 			ergebnis = su.stringUntilCharOrEnd(ergebnis, '(');
 			ergebnis = su.removeallbut(ergebnis, '(', '[', ']', 'V');
@@ -454,6 +472,7 @@ public class Analysator implements Outputable{
 
 	/**
 	 * Tests whether <code> V[]( </code> is following at index.
+	 * 
 	 * @param input
 	 * @param index
 	 * @return reslut
@@ -468,9 +487,9 @@ public class Analysator implements Outputable{
 				return false;
 
 			}
-			
+
 			index++;
-			
+
 			String ente = su.everythInSquaredBrackets(input).substring(index);
 
 			if (ente == null) {
@@ -505,55 +524,51 @@ public class Analysator implements Outputable{
 		return false;
 
 	}
-	
+
 	/**
-	 * This method is different than the others, but that might change, others might be reformatted later on.
-	 * -1 means no root
-	 * 0 means usual root
-	 * 1 means nth Root
+	 * This method is different than the others, but that might change, others might
+	 * be reformatted later on. -1 means no root 0 means usual root 1 means nth Root
+	 * 
 	 * @param input
 	 * @param index
 	 * @return shortresult
 	 */
 	public short isAnyRoot(String input, int index) {
-		
+
 		if (input.charAt(index) != 'V') {
-			
+
 			return -1;
-			
+
 		}
-		
+
 		int ende = su.endParentheses(input.substring(index));
-		
+
 		String rootConstruct = input.substring(index, ende + 1);
-		
+
 		rootConstruct = su.removeallbut(input, '(', ')', '[', ']', 'V');
-		
+
 		if (rootConstruct.equals("V()")) {
-			
+
 			return 0;
-			
+
 		} else if (rootConstruct.equals("V[]()")) {
-			
+
 			return 1;
-			
+
 		} else {
-			
+
 			return -1;
-			
+
 		}
-		
-		
-		
+
 	}
 
-	
 	/**
-	 * Tells whether at index a function 
-	 * <code>
+	 * Tells whether at index a function <code>
 	 *       Sin, Cos, Tan <p>
 	 *       or a root construct 
 	 * </code> is being used.
+	 * 
 	 * @param input
 	 * @param index
 	 * @return result
@@ -642,7 +657,7 @@ public class Analysator implements Outputable{
 			return true;
 		case '.': // also ','
 			return true;
-		case ',': 
+		case ',':
 			return true;
 		case 'V':
 			return true;
@@ -766,7 +781,7 @@ public class Analysator implements Outputable{
 		}
 
 		return ' ';
-		
+
 	}
 
 }
