@@ -3,22 +3,22 @@ package analysis;
 public class StringUtils {
 
 	/**
-	 * Selbe hier wie substringBefore aus org.apache.commons.lang.StringUtils .
-	 * Das mit Varargs ist aber eine Sache von mir.
+	 * Same as substring from org.apache.commons.lang.StringUtils . I added the
+	 * varargs
 	 * 
-	 * @param eingabe
-	 * @param endchar
+	 * @param input
+	 * @param endChar
 	 * @return
 	 */
-	public String stringbisCharoderEnde(String eingabe, char endchar) {
+	public String stringUntilCharOrEnd(String input, char endChar) {
 
-		int fortschritt = 0;
+		int progress = 0;
 		String returntxt = "";
 
-		while (eingabe.charAt(fortschritt) == endchar && fortschritt < eingabe.length()) {
+		while (input.charAt(progress) == endChar && progress < input.length()) {
 
-			returntxt = returntxt + eingabe.charAt(fortschritt);
-			fortschritt++;
+			returntxt = returntxt + input.charAt(progress);
+			progress++;
 
 		}
 
@@ -27,20 +27,21 @@ public class StringUtils {
 	}
 
 	/**
-	 * das Selbe wie oben, nur mit mehreren Endchars
+	 * Same as stringbisCharoderEnde(String input, char endChar), just more
+	 * endchars.
 	 * 
-	 * @param eingabe
-	 * @param endchar
+	 * @param input
+	 * @param endChar
 	 * @return
 	 */
-	public String stringbisCharoderEnde(String eingabe, char... endchar) {
+	public String stringUntilCharOrEnd(String input, char... endChar) {
 
-		int fortschritt = 0;
+		int progress = 0;
 		String returntxt = "";
 
-		while (notEqualsanyof(eingabe.charAt(fortschritt), endchar) && fortschritt < eingabe.length()) {
+		while (notEqualsAnyOf(input.charAt(progress), endChar) && progress < input.length()) {
 
-			returntxt = returntxt + eingabe.charAt(fortschritt);
+			returntxt = returntxt + input.charAt(progress);
 
 		}
 
@@ -49,17 +50,18 @@ public class StringUtils {
 	}
 
 	/**
-	 * Zum Vergleichen von Chars.
+	 * Used to compare one char to a list of others. Checks whether the first char
+	 * does not equal any of the following chars.
 	 * 
-	 * @param zuvergleichen
-	 * @param anyofthese
+	 * @param compareTo
+	 * @param anyOfThese
 	 * @return
 	 */
-	private boolean notEqualsanyof(char zuvergleichen, char... anyofthese) {
+	private boolean notEqualsAnyOf(char compareTo, char... anyOfThese) {
 
-		for (int i = 0; i < anyofthese.length; i++) {
+		for (int i = 0; i < anyOfThese.length; i++) {
 
-			if (anyofthese[i] == zuvergleichen) {
+			if (anyOfThese[i] == compareTo) {
 
 				return false;
 
@@ -71,17 +73,18 @@ public class StringUtils {
 	}
 
 	/**
-	 * Hier letztendlich das Gegenteil zum oberen.
+	 * Used to compare one char to a list of others. Checks whether the first char
+	 * does equal any of the following chars, Opposite to notEqualsanyof(...)
 	 * 
-	 * @param zuvergleichen
+	 * @param compareTo
 	 * @param anyofthese
 	 * @return
 	 */
-	private boolean equalsanyof(char zuvergleichen, char... anyofthese) {
+	private boolean equalsAnyOf(char compareTo, char... anyofthese) {
 
 		for (int i = 0; i < anyofthese.length; i++) {
 
-			if (anyofthese[i] == zuvergleichen) {
+			if (anyofthese[i] == compareTo) {
 
 				return true;
 
@@ -93,80 +96,79 @@ public class StringUtils {
 
 	}
 
-	public String removeallbut(String eingabe, char... allbut) {
+	public String removeallbut(String input, char... allbut) {
 
 		String returntxt = "";
-		int fortschritt = 0;
+		int progress = 0;
 
-		while (fortschritt < eingabe.length()) {
+		while (progress < input.length()) {
 
-			if (equalsanyof(eingabe.charAt(fortschritt), allbut)) {
+			if (equalsAnyOf(input.charAt(progress), allbut)) {
 
-				returntxt = returntxt + eingabe.charAt(fortschritt);
+				returntxt = returntxt + input.charAt(progress);
 
 			}
 
-			fortschritt++;
+			progress++;
 
 		}
 
 		return returntxt;
 
 	}
-	
-	public String removeall(String eingabe, char...remove) {
-		
-		for (int i = 0; i < remove.length; i++) {
-			
-			String removes = "" + remove[i];
-			
-			eingabe = eingabe.replaceAll(removes, "");
-			
-		}
-		
 
-		return eingabe;
-		
+	public String removeall(String input, char... remove) {
+
+		for (int i = 0; i < remove.length; i++) {
+
+			String removes = "" + remove[i];
+
+			input = input.replaceAll(removes, "");
+
+		}
+
+		return input;
+
 	}
 
 	/**
-	 * Hier kann man alles zwischen Zwei Klammern raus holen. Der erste Char
-	 * muss ein '[' sein, sonst wird null zurück gegeben.
+	 * Gets the String in between brackets. First char needs to be <code> [ </code>,
+	 * else null will be returned.
 	 * 
-	 * Fuer "[5+4 + V [3] (4+4)] + 4 * 3 * 4" wird "5+4 + V [3] (4+4)" zurueck
-	 * gegeben.
+	 * For <code> [5+4 + V [3] (4+4)] + 4 * 3 * 4 </code>will
+	 * <code>  5+4 + V [3] (4+4) </code> be returned.
 	 * 
-	 * @param eingabe
+	 * @param input
 	 * @return
 	 */
-	public String everythInSquaredBrackets(String eingabe) {
+	public String everythInSquaredBrackets(String input) {
 
-		if (eingabe.charAt(0) != '[') {
+		if (input.charAt(0) != '[') {
 
 			return null;
 
 		}
 
-		int eckigeKlammernauf = 0;
-		int eckigeKlamemrnzu = 0;
+		int openBracket = 0;
+		int closedBracket = 0;
 
-		for (int fortschritt = 0; fortschritt < eingabe.length(); fortschritt++) {
+		for (int progress = 0; progress < input.length(); progress++) {
 
-			char zupruefen = eingabe.charAt(fortschritt);
+			char tested = input.charAt(progress);
 
-			if (zupruefen == '[') {
+			if (tested == '[') {
 
-				eckigeKlammernauf++;
+				openBracket++;
 
-			} else if (zupruefen == ']') {
+			} else if (tested == ']') {
 
-				eckigeKlamemrnzu++;
+				closedBracket++;
 
 			}
 
-			if (eckigeKlamemrnzu == eckigeKlammernauf) {
+			if (closedBracket == openBracket) {
 
-				return eingabe.substring(1, fortschritt);
+				return input.substring(1, progress);
 
 			}
 
@@ -175,81 +177,20 @@ public class StringUtils {
 		return null;
 
 	}
-
+	
+	
 	/**
-	 * Sucht das Ende einer eckigen Klammer, gibt es zurück. Wenn es nicht
-	 * funktioniert hat, dann wir -1 zurück gegeben.
+	 * Gets the String in between parentheses. First char needs to be <code> ( </code>,
+	 * else null will be returned.
 	 * 
-	 * @param eingabe
+	 * For <code> (5+4 + V [3] (4+4)) + 4 * 3 * 4 </code>will
+	 * <code>  5+4 + V [3] (4+4) </code> be returned.
+	 * 
+	 * @param input
 	 * @return
 	 */
-	public int endBrackets(String eingabe) {
+	public String everythingInParentheses(String eingabe) {
 
-		int eckigeKlammernauf = 0;
-		int eckigeKlamemrnzu = 0;
-
-		for (int fortschritt = 0; fortschritt < eingabe.length(); fortschritt++) {
-
-			char zupruefen = eingabe.charAt(fortschritt);
-
-			if (zupruefen == '[') {
-
-				eckigeKlammernauf++;
-
-			} else if (zupruefen == ']') {
-
-				eckigeKlamemrnzu++;
-
-				if (eckigeKlamemrnzu == eckigeKlammernauf) {
-
-					return fortschritt;
-
-				}
-				
-			}
-			
-		}
-		
-		return -1;
-	
-	}
-	
-	public int endParenthesis(String eingabe) {
-
-		int rundeKlammernauf = 0;
-		int rundeKlamemrnzu = 0;
-
-		for (int fortschritt = 0; fortschritt < eingabe.length(); fortschritt++) {
-
-			char zupruefen = eingabe.charAt(fortschritt);
-
-			if (zupruefen == '(') {
-
-				rundeKlammernauf++;
-
-			} else if (zupruefen == ')') {
-
-				rundeKlamemrnzu++;
-				
-				if (rundeKlamemrnzu == rundeKlammernauf) {
-
-					return fortschritt;
-
-				}
-				
-
-			}
-
-			
-
-		}
-
-		return -1;
-		
-	}
-	
-	public String allesinrundeKlammern(String eingabe) {
-		
 		if (eingabe.charAt(0) != '(') {
 
 			return null;
@@ -282,7 +223,83 @@ public class StringUtils {
 		}
 
 		return null;
-		
+
+	}
+
+	/**
+	 * Searches the end of the brackets, returns the index of that char which is
+	 * <code> ] </code>. If it did not work, <code> -1 </code> will be returned.
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public int endBrackets(String input) {
+
+		int openBrackets = 0;
+		int closedBrackets = 0;
+
+		for (int progress = 0; progress < input.length(); progress++) {
+
+			char tested = input.charAt(progress);
+
+			if (tested == '[') {
+
+				openBrackets++;
+
+			} else if (tested == ']') {
+
+				closedBrackets++;
+
+				if (closedBrackets == openBrackets) {
+
+					return progress;
+
+				}
+
+			}
+
+		}
+
+		return -1;
+
+	}
+
+	/**
+	 * Searches the end of the parentheses, returns the index of that char which is
+	 * <code> ) </code>. If it did not work, <code> -1 </code> will be returned.
+	 *  
+	 * @param input
+	 * @return
+	 */
+	public int endParentheses(String input) {
+
+		int openParenthesis = 0;
+		int closedParenthesis = 0;
+
+		for (int progress = 0; progress < input.length(); progress++) {
+
+			char tested = input.charAt(progress);
+
+			if (tested == '(') {
+
+				openParenthesis++;
+
+			} else if (tested == ')') {
+
+				closedParenthesis++;
+
+				if (closedParenthesis == openParenthesis) {
+
+					return progress;
+
+				}
+
+			}
+
+		}
+
+		return -1;
+
 	}
 
 }

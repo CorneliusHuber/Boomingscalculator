@@ -12,7 +12,7 @@ import iOStreams.Outputable;
 public class Analysator implements Outputable{
 
 	protected int openParenthesis = 0;
-	protected int closeParenthesis = 0;
+	protected int closedParenthesis = 0;
 	protected char firstParenthesis;
 	protected char lastParenthesis;
 	protected Output outp;
@@ -428,7 +428,7 @@ public class Analysator implements Outputable{
 			 * und dann wird überprüft, ob das die Syntax ist. Schließt aber
 			 * noch nicht so etwas ein: V[5*(4+3)](
 			 */
-			ergebnis = su.stringbisCharoderEnde(ergebnis, '(');
+			ergebnis = su.stringUntilCharOrEnd(ergebnis, '(');
 			ergebnis = su.removeallbut(ergebnis, '(', '[', ']', 'V');
 
 			if (ergebnis.equals("V(") || ergebnis.equals("V[](")) {
@@ -523,7 +523,7 @@ public class Analysator implements Outputable{
 			
 		}
 		
-		int ende = su.endParenthesis(input.substring(index));
+		int ende = su.endParentheses(input.substring(index));
 		
 		String rootConstruct = input.substring(index, ende + 1);
 		

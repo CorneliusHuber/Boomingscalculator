@@ -312,7 +312,7 @@ public class Term implements Outputable {
 	private String getParenthesisString() {
 
 		printlog("getParenthesis()");
-		return sU.allesinrundeKlammern(stringTerm.substring(progress));
+		return sU.everythingInParentheses(stringTerm.substring(progress));
 
 	}
 
@@ -326,7 +326,7 @@ public class Term implements Outputable {
 	 */
 	private String getBracketsString() {
 
-		printlog("erstelleeckigeKlammernneu");
+		printlog("getBracketsString()");
 		return sU.everythInSquaredBrackets(stringTerm.substring(progress));
 
 	}
