@@ -189,34 +189,34 @@ public class StringUtils {
 	 * @param input
 	 * @return
 	 */
-	public String everythingInParentheses(String eingabe) {
+	public String everythingInParentheses(String input) {
 
-		if (eingabe.charAt(0) != '(') {
+		if (input.charAt(0) != '(') {
 
 			return null;
 
 		}
 
-		int klammernauf = 0;
-		int klamemrnzu = 0;
+		int openParenthesis = 0;
+		int closedParenthesis = 0;
 
-		for (int fortschritt = 0; fortschritt < eingabe.length(); fortschritt++) {
+		for (int progress = 0; progress < input.length(); progress++) {
 
-			char zupruefen = eingabe.charAt(fortschritt);
+			char tested = input.charAt(progress);
 
-			if (zupruefen == '(') {
+			if (tested == '(') {
 
-				klammernauf++;
+				openParenthesis++;
 
-			} else if (zupruefen == ')') {
+			} else if (tested == ')') {
 
-				klamemrnzu++;
+				closedParenthesis++;
 
 			}
 
-			if (klamemrnzu == klammernauf) {
+			if (closedParenthesis == openParenthesis) {
 
-				return eingabe.substring(1, fortschritt);
+				return input.substring(1, progress);
 
 			}
 
