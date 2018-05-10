@@ -25,8 +25,7 @@ public class Term implements Outputable {
 	protected short nextAlgebraicSign = 1;
 
 	/**
-	 * Standard constructor, if you do not want everything this does, use
-	 * Term().
+	 * Standard constructor, if you do not want everything this does, use Term().
 	 * 
 	 * @param input
 	 */
@@ -41,9 +40,9 @@ public class Term implements Outputable {
 	}
 
 	/**
-	 * Second constructor, just does <code> indent() </code>. If you are using
-	 * this, you will need to do anything Term(input) does. It is also protected
-	 * which will not allow any other classes else than children to use this as
+	 * Second constructor, just does <code> indent() </code>. If you are using this,
+	 * you will need to do anything Term(input) does. It is also protected which
+	 * will not allow any other classes else than children to use this as
 	 * unknowingly what it does.
 	 */
 	protected Term() {
@@ -94,7 +93,6 @@ public class Term implements Outputable {
 
 	}
 
-	
 	public String returnStringTerm() {
 
 		if (stringTerm != null) {
@@ -108,9 +106,10 @@ public class Term implements Outputable {
 		}
 
 	}
-	
+
 	/**
 	 * Reverseengineering stringTerm, output goes to console.
+	 * 
 	 * @return
 	 */
 	public String returnStringTermReverse() {
@@ -156,13 +155,11 @@ public class Term implements Outputable {
 		}
 	}
 
-
 	private void delWhiteSpaces() {
 
 		stringTerm = sU.removeall(stringTerm, ' ');
 
 	}
-
 
 	public double calculate() {
 
@@ -273,7 +270,6 @@ public class Term implements Outputable {
 
 	}
 
-
 	private void genRoot() {
 
 		printlog("Root found");
@@ -308,7 +304,8 @@ public class Term implements Outputable {
 	/**
 	 * Grabs itself the content of parentheses.
 	 * <p>
-	 * Also works for <code> "(...(...)...)"</code>, return would be <code>"...(...)..."</code> .
+	 * Also works for <code> "(...(...)...)"</code>, return would be
+	 * <code>"...(...)..."</code> .
 	 * 
 	 * @return
 	 */
@@ -322,7 +319,8 @@ public class Term implements Outputable {
 	/**
 	 * Grabs itself the content of a brackets.
 	 * <p>
-	 * Also works for <code> "[...[...]...]"</code>, return would be <code> "...[...]..."</code> .
+	 * Also works for <code> "[...[...]...]"</code>, return would be
+	 * <code> "...[...]..."</code> .
 	 * 
 	 * @return
 	 */
@@ -334,15 +332,8 @@ public class Term implements Outputable {
 	}
 
 	/**
-	 * Die Teilverarbeitung ist zwar nicht so schön, aber dafür nützlich. Sie
-	 * wird gebraucht, um zu gewährleisten, dass es eine Chronik gibt, um mal
-	 * und geteilt zu gewährleisten.
-	 * 
-	 * @param rechnungsteil
-	 */
-	
-	/**
 	 * This method runs the buffer. It is needed for postbundling objects.
+	 * 
 	 * @param termObj
 	 */
 	public void buffer(Term termObj) {
@@ -352,20 +343,20 @@ public class Term implements Outputable {
 
 		if (firstIteration) {
 
-			//printlog("first Iteration");
+			// printlog("first Iteration");
 			lastParts.add(termObj);
 			firstIteration = false;
 
 		} else if (thisTimeCollect == NO && lastTimeCollect == NO) {
 
-			//printlog("Nein und Nein");
+			// printlog("No and no");
 			termParts.add(lastParts.get(0));
 			lastParts.remove(0);
 			lastParts.add(termObj);
 
 		} else if (thisTimeCollect == NO && lastTimeCollect == MULT) {
 
-			//printlog("Nein und Mal.");
+			// printlog("no and times.");
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -387,9 +378,9 @@ public class Term implements Outputable {
 
 		} else if (thisTimeCollect == NO && lastTimeCollect == DIV) {
 
-			printlog("Nein und Geteilt.");
+			printlog("no and divide.");
 
-			// erst mal alle Bestandteile sammeln
+			// collecting all parts
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -398,15 +389,13 @@ public class Term implements Outputable {
 			}
 
 			termParts.add(new Multiplikation(temp, Multiplikation.DIV));
-			// letzte zurücksetzten
+			// reset lastParts
 			lastParts = new ArrayList<Term>();
 			lastParts.add(termObj);
 
 		} else if (thisTimeCollect == MULT && lastTimeCollect == DIV) {
 
-			printlog("Mal und Geteilt.");
-
-			// erst mal alle Bestandteile sammeln
+			printlog("times and divide.");
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -414,16 +403,14 @@ public class Term implements Outputable {
 
 			}
 
-			// letzte zurücksetzten
 			lastParts = new ArrayList<Term>();
 			lastParts.add(new Multiplikation(temp, Multiplikation.DIV));
 			lastParts.add(termObj);
 
 		} else if (thisTimeCollect == DIV && lastTimeCollect == MULT) {
 
-			printlog("Geteilt und Mal.");
+			printlog("divide and times.");
 
-			// erst mal alle Bestandteile sammeln
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -431,7 +418,6 @@ public class Term implements Outputable {
 
 			}
 
-			// letzte zurücksetzten
 			lastParts = new ArrayList<Term>();
 			lastParts.add(new Multiplikation(temp, Multiplikation.MULT));
 			lastParts.add(termObj);
@@ -446,9 +432,8 @@ public class Term implements Outputable {
 
 	}
 
-	
 	/**
-	 * Generates all the parts we need to have in temParts. 
+	 * Generates all the parts we need to have in temParts.
 	 */
 	protected void genParts() {
 
@@ -459,22 +444,22 @@ public class Term implements Outputable {
 
 		while (progress < stringTerm.length()) {
 
-			// Fall 1: einfache Zahl
+			// Case 1: einfache Zahl
 			if (analysator.isNumber(stringTerm.charAt(progress))) {
 
 				printlog("Number at " + progress);
 				genNumber();
-				printlog("Zahl abgeschlossen. Mache weiter in genTeile()");
+				printlog("Finished genNumber()");
 
 			}
 
-			// Fall 2: sin,cos,tan
+			// Case 2: sin,cos,tan
 
 			else if (analysator.isSinCosTan(stringTerm, progress)) {
 
 				printlog("Sin/Cos/Tan at " + progress);
 				genSinCosTan();
-				printlog("SinCosTan agbeschlossen, mache weiter in genTeile()");
+				printlog("Finished genSinCosTan()");
 
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 1) {
 
@@ -482,7 +467,7 @@ public class Term implements Outputable {
 
 				genNthRoot();
 
-				printlog("Wurzel abgeschlossen, mache weiter in genTeile()");
+				printlog("Finished genNthRoot()");
 
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 0) {
 
@@ -490,25 +475,29 @@ public class Term implements Outputable {
 
 				genRoot();
 
-				printlog("Wurzel abgeschlossen, mache weiter in genTeile()");
+				printlog("Finished genRoot()");
 
 			} else if (stringTerm.charAt(progress) == '(') {
 
 				printlog("Parenthesis at " + progress);
 				genParenthesis();
-				printlog("Klammer abgeschlossen, mache weiter in genTeile()");
+				printlog("Finished genParenthesis()");
 
 			} else if (stringTerm.charAt(progress) == '+') {
 
-				// Die Rechenzeichen dürfen nicht das letzte sein, was
-				// durchlaufen wird.
+				// TODO cleanup
+
+				/*
+				 * I wrote the notice that the arithmetic operators should not be the last thing
+				 * to be checked. Well, it is. Works though. I am going to look what is up here
+				 * when I am polishing the code.
+				 */
 
 				printlog("+ found");
 				progress++;
 				lastTimeCollect = thisTimeCollect;
 				thisTimeCollect = NO;
 				nextAlgebraicSign = 1;
-				printlog("mache weiter in genTeile()");
 
 			} else if (stringTerm.charAt(progress) == '-') {
 
@@ -517,7 +506,6 @@ public class Term implements Outputable {
 				nextAlgebraicSign = -1;
 				lastTimeCollect = thisTimeCollect;
 				thisTimeCollect = NO;
-				printlog("mache weiter in genTeile()");
 
 			} else if (stringTerm.charAt(progress) == '/') {
 
@@ -526,7 +514,6 @@ public class Term implements Outputable {
 				lastTimeCollect = thisTimeCollect;
 				thisTimeCollect = DIV;
 				nextAlgebraicSign = 1;
-				printlog("mache weiter in genTeile()");
 
 			} else if (stringTerm.charAt(progress) == '*') {
 
@@ -537,20 +524,13 @@ public class Term implements Outputable {
 				nextAlgebraicSign = 1;
 				printlog("lsammeln = " + lastTimeCollect);
 				printlog("sammeln = " + thisTimeCollect);
-				printlog("mache weiter in genTeile()");
 
 			} else if (stringTerm.charAt(progress) == '^') {
 				printlog("potence at " + progress);
 				progress++;
+
 				/*
-				 * Zwei Möglichekeiten: Entweder hier ist eine Klammer, oder
-				 * hier ist keine Klammer, ich habe mich jetzt zuerst mal dazu
-				 * entschieden, heir keine zu verwenden. Wichtig ist, dass dann
-				 * hier alles in einer Klammer steht.
-				 * 
-				 * Ich hatte das Problem, dass hier die Rehnung 25^3 war, was
-				 * aber keine Klammer beinhaltet. Ich könnte mich noch dazu
-				 * entscheiden, hier eine Fallunterscheidung zu machen.
+				 * Parenthesis needs to follow
 				 */
 
 				String temp = getParenthesisString();
@@ -566,17 +546,14 @@ public class Term implements Outputable {
 			}
 		}
 
-		/*
-		 * Dieser Teil macht leider nicht das selbe wie die Teilverarbeitung.
-		 */
-
-		printlog("Bringe letztes Element in rechnungsbestandteil");
-		printlog("kritischer Teil, teilVerarbeitung in genTeile()");
+		//Buffering the last time, a bit different then the other iterations.
+		
+		printlog("last buffering");
+		printlog("critical, buffer() in genPats()");
 
 		if (thisTimeCollect == MULT && lastTimeCollect == MULT) {
 
-			printlog("Mal und Mal.");
-			// erst mal alle Bestandteile sammeln
+			printlog("Times and times");
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -588,8 +565,7 @@ public class Term implements Outputable {
 
 		} else if (thisTimeCollect == DIV && lastTimeCollect == DIV) {
 
-			printlog("Geteilt und Geteilt.");
-			// erst mal alle Bestandteile sammeln
+			printlog("Divide and divide.");
 			Term[] temp = new Term[lastParts.size()];
 			for (int i = 0; i < temp.length; i++) {
 
@@ -599,28 +575,28 @@ public class Term implements Outputable {
 
 		} else if (thisTimeCollect == MULT && lastTimeCollect != MULT) {
 
-			printlog("Mal und nicht Mal");
+			printlog("times and not times");
 			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, Multiplikation.MULT));
 
 		} else if (thisTimeCollect == DIV && lastTimeCollect != DIV) {
 
-			printlog("Geteilt und nicht Geteilt.");
+			printlog("divide and not divide.");
 			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, Multiplikation.DIV));
 
 		} else if (thisTimeCollect == NO && lastTimeCollect == NO) {
 
-			printlog("Nein und Nein.");
+			printlog("No and no.");
 			termParts.add(lastParts.get(0));
 
 		}
 
 		else {
 
-			printlog("Bei der teilVerarbeitung in genTeile() etwas vergessen!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			printlog("Foregot a case in here!!!");
 
 		}
 
-		printlog("Fertig! :)");
+		printlog("feddig.");
 
 	}
 }
