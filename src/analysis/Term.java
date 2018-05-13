@@ -31,7 +31,8 @@ public class Term implements Outputable {
 	protected Analysator analysator = new Analysator();
 	protected double result = 0;
 	protected short algebraicSign = 1; // if negativ -1, else +1
-	protected Parenthesis exponent;
+	//Exponent can now be a term
+	protected Term exponent;
 	private int progress = 0;
 	public static final char NO = 'n';
 	public static final char MULT = 'm';
@@ -118,7 +119,7 @@ public class Term implements Outputable {
 			return stringTerm;
 
 		} else {
- 
+
 			return "Error: stringTerm == null. (This should never happen. :()";
 
 		}
@@ -160,7 +161,7 @@ public class Term implements Outputable {
 
 	}
 
-	public void setExponent(Parenthesis ex) {
+	public void setExponent(Term ex) {
 
 		if (exponent == null) {
 
@@ -172,11 +173,13 @@ public class Term implements Outputable {
 
 		}
 	}
+	
+
 
 	private void delWhiteSpaces() {
 
 		stringTerm = sU.removeall(stringTerm, ' ');
-		
+
 	}
 
 	public double calculate() {
@@ -551,10 +554,22 @@ public class Term implements Outputable {
 				 * Parenthesis needs to follow
 				 */
 
-				String temp = getParenthesisString();
-				printlog("Test " + temp);
-				lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
-				printlog("Exponent abgeschlossen, mache weiter in genTeile()");
+				String temp;
+				
+				if (stringTerm.charAt(progress) == '(') {
+
+					temp = getParenthesisString();
+					printlog("Test " + temp);
+					lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
+					printlog("Exponent abgeschlossen, mache weiter in genTeile()");
+				
+				} else if (analysator.isNumber(stringTerm.charAt(progress))) {
+					
+					temp = getNumberString();
+					printlog("Exponent with just a number");
+					lastParts.get(lastParts.size() - 1).setExponent(new Number(temp));
+					
+				}
 
 			} else {
 
@@ -564,8 +579,8 @@ public class Term implements Outputable {
 			}
 		}
 
-		//Buffering the last time, a bit different then the other iterations.
-		
+		// Buffering the last time, a bit different then the other iterations.
+
 		printlog("last buffering");
 		printlog("critical, buffer() in genPats()");
 
@@ -614,7 +629,7 @@ public class Term implements Outputable {
 
 		}
 
-		printlog("feddig.");  //German dialect, states that the method has finished.
+		printlog("feddig."); // German dialect, states that the method has finished.
 
 	}
 }

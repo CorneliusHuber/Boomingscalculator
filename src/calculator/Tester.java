@@ -43,7 +43,7 @@ public class Tester implements Outputable {
 
 	Tester() {
 
-		matthiasDavidsRechnung();
+		testFloatPotence();
 
 	}
 
@@ -245,6 +245,20 @@ public class Tester implements Outputable {
 			Output.printlog(args[i]);
 			
 		}
+		
+	}
+	
+	public void testNatPotenceAfterMult() {
+		
+		re = new Term("5*4^4");
+		re.calculate();
+		
+	}
+	
+	public void testFloatPotence() {
+		
+		re = new Term("4^3.5");
+		re.calculate();
 		
 	}
 

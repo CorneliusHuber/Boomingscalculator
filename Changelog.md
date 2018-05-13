@@ -1,7 +1,13 @@
+## Version 1.1.0 alpha
+### What is planned?
+ - More translations
+ - less Exceptions for incorrect input
+ - Potences will also be allowed to look like this: 5^4^ instead of just 5^(4)^
+ - Small refactoring
+
 ## Version 1.0.0 is out!
 ### What is new?
  - Commandline class is now in English
  - Fixed many Bugs
  - Some small performance improvements
  - Many parts of the source are now also in English, but not all.
- - You can now use `--verbose` as an argument to show more information
