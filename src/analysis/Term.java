@@ -606,6 +606,11 @@ public class Term implements Outputable {
 			printlog("No and no.");
 			termParts.add(lastParts.get(0));
 
+		} else if (thisTimeCollect == NO && lastTimeCollect == MULT || thisTimeCollect == NO && lastTimeCollect == DIV) {
+			
+			printlog("NO and MULT or DIV");
+			termParts.add(lastParts.get(0));
+			
 		}
 
 		else {
