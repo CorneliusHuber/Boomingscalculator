@@ -43,7 +43,7 @@ public class Tester implements Outputable {
 
 	Tester() {
 
-		testFloatPotence();
+		testStringRevMult();
 
 	}
 
@@ -259,6 +259,14 @@ public class Tester implements Outputable {
 		
 		re = new Term("4^3.5");
 		re.calculate();
+		
+	}
+	
+	public void testStringRevMult () {
+		
+		re = new Term("5*4/3*7+3");
+		re.calculate();
+		Output.printlog(re.returnStringTermReverse() + " is the term");
 		
 	}
 

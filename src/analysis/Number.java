@@ -70,6 +70,18 @@ public class Number extends Term {
 		
 		String stringrev = Double.toString(ergebnis);
 		
+		if (ergebnis < 0) {
+			
+			stringrev = "(-" + stringrev;
+			
+		} else {
+			
+			stringrev = "(+" + stringrev;
+			
+		}
+		
+		stringrev = stringrev + ")";
+		
 		return stringrev;
 		
 	}

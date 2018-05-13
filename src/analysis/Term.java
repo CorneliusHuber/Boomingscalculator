@@ -257,7 +257,7 @@ public class Term implements Outputable {
 
 	private void genNumber() {
 
-		printlog("Number found()");
+		printlog("Number found");
 
 		String stringNumber = getNumberString();
 
@@ -465,18 +465,13 @@ public class Term implements Outputable {
 
 		while (progress < stringTerm.length()) {
 
-			// Case 1: einfache Zahl
 			if (analysator.isNumber(stringTerm.charAt(progress))) {
 
 				printlog("Number at " + progress);
 				genNumber();
 				printlog("Finished genNumber()");
 
-			}
-
-			// Case 2: sin,cos,tan
-
-			else if (analysator.isSinCosTan(stringTerm, progress)) {
+			} else if (analysator.isSinCosTan(stringTerm, progress)) {
 
 				printlog("Sin/Cos/Tan at " + progress);
 				genSinCosTan();
@@ -485,17 +480,13 @@ public class Term implements Outputable {
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 1) {
 
 				printlog("nthRoot at " + progress);
-
 				genNthRoot();
-
 				printlog("Finished genNthRoot()");
 
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 0) {
 
 				printlog("Root at " + progress);
-
 				genRoot();
-
 				printlog("Finished genRoot()");
 
 			} else if (stringTerm.charAt(progress) == '(') {
@@ -621,11 +612,16 @@ public class Term implements Outputable {
 			printlog("No and no.");
 			termParts.add(lastParts.get(0));
 
+		} else if (thisTimeCollect == NO && lastTimeCollect == MULT || thisTimeCollect == NO && lastTimeCollect == DIV) {
+			
+			printlog("NO and MULT or DIV");
+			termParts.add(lastParts.get(0));
+			
 		}
 
 		else {
 
-			printlog("Foregot a case in here!!!");
+			printlog("Foregot a case in here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 		}
 
