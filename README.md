@@ -1,9 +1,7 @@
-# BoomingsCalculator
-<<<<<<< HEAD
+
 As I have been bored and needed to learn Java I started this as a fun little hobby project to practice a bit. This was in December 2016. Now it is 2018 and I can actually calculate something with it. Well, actually I can do so since summer this year. This project started out in German, so I am translating it right now to English. Also this is seen more as an experiment than a "real" calculator, also not a finished one. There will be features added, but also if there are bugs, I will fix them, but I cannot guarantee that all major bugs are fixed by now.
-=======
-As I have been bored and needed to learn Java I started this as a fun little hobby project to practice a bit. This was December 2016. Now it is 2018 and I can actually calculate something with it. Well, actually I can do so since summer this year. This project started out in German, so I am translating it right now to English. 
->>>>>>> refs/heads/Version_1.1
+
+
 
 Right now these features are implemented: 
 
