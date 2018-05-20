@@ -18,6 +18,8 @@
 
 package calculator;
 
+import java.security.Principal;
+
 import analysis.*;
 import analysis.Number;
 import iOStreams.*;
@@ -42,8 +44,9 @@ public class Tester implements Outputable {
 	}
 
 	Tester() {
-		testStringRevMult();
-
+		
+		testExponentMult();
+		
 	}
 
 	private void todo() {
@@ -266,6 +269,15 @@ public class Tester implements Outputable {
 		re = new Term("5*4/3*7+3");
 		re.calculate();
 		Output.printlog(re.returnStringTermReverse() + " is the term");
+		
+	}
+	
+	public void testExponentMult() {
+		
+		re = new Term("8+7^4*3");
+		re.calculate();
+		System.out.println("stringrev:");
+		System.out.println(re.returnStringTermReverse());
 		
 	}
 

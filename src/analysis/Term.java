@@ -357,7 +357,7 @@ public class Term implements Outputable {
 	 * 
 	 * @param termObj
 	 */
-	public void buffer(Term termObj) {
+	private void buffer(Term termObj) {
 		printlog();
 		printlog();
 		printlog("buffering");
@@ -545,16 +545,14 @@ public class Term implements Outputable {
 				 * Parenthesis needs to follow
 				 */
 				
-				//TODO somewhere in here is a bug, 4^2 is 18 for some reason, probably the 2 is added after this. Will be fixed in next commit
-
 				String temp;
 				
 				if (stringTerm.charAt(progress) == '(') {
 
 					temp = getParenthesisString();
-					printlog("Test " + temp);
+					printlog("Exponent with a parenthesis.");
+					progress = progress + 2;
 					lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
-					printlog("Exponent abgeschlossen, mache weiter in genTeile()");
 				
 				} else if (analysator.isNumber(stringTerm.charAt(progress))) {
 					

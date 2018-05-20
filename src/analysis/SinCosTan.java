@@ -55,31 +55,37 @@ public class SinCosTan extends Term {
 	@Override
 	public String returnStringTermReverse() {
 		
-		String rechnungrev;
+		String stringRev;
 		
 		if (ausgewählt == SINUS) {
 			
-			rechnungrev = "sin(";
+			stringRev = "sin(";
 		
 		} else if (ausgewählt == COSINUS) {
 			
-			rechnungrev = "cos(";
+			stringRev = "cos(";
 			
 		} else if (ausgewählt == TANGENS) {
 			
-			rechnungrev = "tan(";
+			stringRev = "tan(";
 			
 		} else {
 			
-			rechnungrev = "";
+			stringRev = "";
 			printlog("Hier ist nichts ausgewählt. gebeRechnungsTeileaus() in SinCosTan");
 			
 		}
 		
 		
-		rechnungrev = rechnungrev + klammer.returnStringTerm();
+		stringRev = stringRev + klammer.returnStringTerm();
 		
-		rechnungrev = rechnungrev + ")";
+		stringRev = stringRev + ")";
+		
+		if (exponent != null) {
+			
+			stringRev = stringRev + exponent.returnStringTermReverse();
+			
+		}
 		
 		return "";
 		

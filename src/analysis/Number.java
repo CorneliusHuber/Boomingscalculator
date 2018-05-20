@@ -82,6 +82,12 @@ public class Number extends Term {
 		
 		stringrev = stringrev + ")";
 		
+		if (exponent != null) {
+			
+			stringrev = stringrev + "^" + exponent.returnStringTermReverse();
+			
+		}
+		
 		return stringrev;
 		
 	}
