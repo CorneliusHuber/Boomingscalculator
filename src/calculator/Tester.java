@@ -1,6 +1,6 @@
 /**
  *  This file is part of BoomingsCalculator
- *  Copyright (C) 2018  <name of author>
+ *  Copyright (C) 2018  Cornelius Huber
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
 
 package calculator;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.Port;
+
 import analysis.*;
 import analysis.Number;
 import iOStreams.*;
@@ -34,16 +36,16 @@ public class Tester implements Outputable {
 		
 		Output.setextendedlog(true);
 		outputingArgsTest(args);
-		long timebegin = System.nanoTime();
+		long timeBegin = System.nanoTime();
 		Tester te = new Tester();
-		long timeend = System.nanoTime();
-		System.out.println("Dauer: " + (timeend - timebegin) + " Nanosekunden.");
+		long timeEnd = System.nanoTime();
+		System.out.println("Duration: " + (timeEnd - timeBegin) + " Nanoseconds.");
 		
 	}
 
 	Tester() {
 
-		matthiasDavidsRechnung();
+		testeExponent();
 
 	}
 

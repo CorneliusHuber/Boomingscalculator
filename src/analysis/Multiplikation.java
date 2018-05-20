@@ -1,6 +1,6 @@
 /**
  *  This file is part of BoomingsCalculator
- *  Copyright (C) 2018  <name of author>
+ *  Copyright (C) 2018  Cornelius Huber
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@ package analysis;
 
 public class Multiplikation extends Term {
 
-	private char selection;
+	private collectTypes selection;
 
-	Multiplikation(Term[] termParts, char selection) {
+	Multiplikation(Term[] termParts, collectTypes selection) {
 
 		super();
 		printlog();
@@ -52,7 +52,7 @@ public class Multiplikation extends Term {
 		}
 
 		this.selection = selection;
-		if (selection == MULT) {
+		if (selection == collectTypes.MULT) {
 
 			printlog("Multiplikation with " + termParts.length + " parts is being made.");
 
@@ -73,11 +73,11 @@ public class Multiplikation extends Term {
 
 		for (int i = 1; i < termParts.size(); i++) {
 
-			if (selection == MULT) {
+			if (selection == collectTypes.MULT) {
 
 				rechnungsstring = rechnungsstring + '*';
 
-			} else if (selection == DIV) {
+			} else if (selection == collectTypes.DIV) {
 
 				rechnungsstring = rechnungsstring + '/';
 
@@ -114,7 +114,7 @@ public class Multiplikation extends Term {
 
 		double ergebnis = termParts.get(0).calculate();
 
-		if (selection == MULT) {
+		if (selection == collectTypes.MULT) {
 
 			for (int i = 1; i < termParts.size(); i++) {
 				/*
@@ -123,11 +123,11 @@ public class Multiplikation extends Term {
 				 */
 
 				ergebnis *= termParts.get(i).calculate();
-				printlog("Malrechnung fertig ausgerechnet.");
+				printlog("Division calculated.");
 
 			}
 
-		} else if (selection == DIV) {
+		} else if (selection == collectTypes.DIV) {
 
 			for (int i = 1; i < termParts.size(); i++) {
 				/*
@@ -136,7 +136,7 @@ public class Multiplikation extends Term {
 				 */
 
 				ergebnis /= termParts.get(i).calculate();
-				printlog("Geteiltrechnung fertig ausgerechnet.");
+				printlog("Dvision calculated.");
 
 			}
 

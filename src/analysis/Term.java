@@ -1,6 +1,6 @@
 /**
  *  This file is part of BoomingsCalculator
- *  Copyright (C) 2018  <name of author>
+ *  Copyright (C) 2018  Cornelius Huber
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@ public class Term implements Outputable {
 	protected short algebraicSign = 1; // if negativ -1, else +1
 	protected Parenthesis exponent;
 	private int progress = 0;
-	public static final char NO = 'n';
-	public static final char MULT = 'm';
-	public static final char DIV = 'g';
-	protected char lastTimeCollect = NO;
-	protected char thisTimeCollect = NO;
+	protected enum collectTypes {
+			NO, MULT, DIV
+	};
+	protected collectTypes lastTimeCollect = collectTypes.NO;
+	protected collectTypes thisTimeCollect = collectTypes.NO;
 	protected boolean firstIteration = true;
 	protected StringUtils sU = new StringUtils();
 	protected short nextAlgebraicSign = 1;
@@ -365,14 +365,14 @@ public class Term implements Outputable {
 			lastParts.add(termObj);
 			firstIteration = false;
 
-		} else if (thisTimeCollect == NO && lastTimeCollect == NO) {
+		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.NO) {
 
 			// printlog("No and no");
 			termParts.add(lastParts.get(0));
 			lastParts.remove(0);
 			lastParts.add(termObj);
 
-		} else if (thisTimeCollect == NO && lastTimeCollect == MULT) {
+		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.MULT) {
 
 			// printlog("no and times.");
 			Term[] temp = new Term[lastParts.size()];
@@ -382,19 +382,19 @@ public class Term implements Outputable {
 
 			}
 
-			termParts.add(new Multiplikation(temp, Multiplikation.MULT));
+			termParts.add(new Multiplikation(temp, collectTypes.MULT));
 			// reset lastParts
 			lastParts = new ArrayList<Term>();
 			lastParts.add(termObj);
 
-		} else if (thisTimeCollect == MULT && lastTimeCollect != DIV
-				|| thisTimeCollect == DIV && lastTimeCollect != MULT) {
+		} else if (thisTimeCollect == collectTypes.MULT && lastTimeCollect != collectTypes.DIV
+				|| thisTimeCollect == collectTypes.DIV && lastTimeCollect != collectTypes.MULT) {
 
 			printlog("Mal und nicht Geteilt oder Geteilt und nicht Mal.");
 
 			lastParts.add(termObj);
 
-		} else if (thisTimeCollect == NO && lastTimeCollect == DIV) {
+		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.DIV) {
 
 			printlog("no and divide.");
 
@@ -406,12 +406,12 @@ public class Term implements Outputable {
 
 			}
 
-			termParts.add(new Multiplikation(temp, Multiplikation.DIV));
+			termParts.add(new Multiplikation(temp, collectTypes.DIV));
 			// reset lastParts
 			lastParts = new ArrayList<Term>();
 			lastParts.add(termObj);
 
-		} else if (thisTimeCollect == MULT && lastTimeCollect == DIV) {
+		} else if (thisTimeCollect == collectTypes.MULT && lastTimeCollect == collectTypes.DIV) {
 
 			printlog("times and divide.");
 			Term[] temp = new Term[lastParts.size()];
@@ -422,10 +422,10 @@ public class Term implements Outputable {
 			}
 
 			lastParts = new ArrayList<Term>();
-			lastParts.add(new Multiplikation(temp, Multiplikation.DIV));
+			lastParts.add(new Multiplikation(temp, collectTypes.DIV));
 			lastParts.add(termObj);
 
-		} else if (thisTimeCollect == DIV && lastTimeCollect == MULT) {
+		} else if (thisTimeCollect == collectTypes.DIV && lastTimeCollect == collectTypes.MULT) {
 
 			printlog("divide and times.");
 
@@ -437,7 +437,7 @@ public class Term implements Outputable {
 			}
 
 			lastParts = new ArrayList<Term>();
-			lastParts.add(new Multiplikation(temp, Multiplikation.MULT));
+			lastParts.add(new Multiplikation(temp, collectTypes.MULT));
 			lastParts.add(termObj);
 
 		} else {
@@ -514,7 +514,7 @@ public class Term implements Outputable {
 				printlog("+ found");
 				progress++;
 				lastTimeCollect = thisTimeCollect;
-				thisTimeCollect = NO;
+				thisTimeCollect = collectTypes.NO;
 				nextAlgebraicSign = 1;
 
 			} else if (stringTerm.charAt(progress) == '-') {
@@ -523,14 +523,14 @@ public class Term implements Outputable {
 				progress++;
 				nextAlgebraicSign = -1;
 				lastTimeCollect = thisTimeCollect;
-				thisTimeCollect = NO;
+				thisTimeCollect = collectTypes.NO;
 
 			} else if (stringTerm.charAt(progress) == '/') {
 
 				printlog("/ found");
 				progress++;
 				lastTimeCollect = thisTimeCollect;
-				thisTimeCollect = DIV;
+				thisTimeCollect = collectTypes.DIV;
 				nextAlgebraicSign = 1;
 
 			} else if (stringTerm.charAt(progress) == '*') {
@@ -538,7 +538,7 @@ public class Term implements Outputable {
 				printlog("* found");
 				progress++;
 				lastTimeCollect = thisTimeCollect;
-				thisTimeCollect = MULT;
+				thisTimeCollect = collectTypes.MULT;
 				nextAlgebraicSign = 1;
 				printlog("lsammeln = " + lastTimeCollect);
 				printlog("sammeln = " + thisTimeCollect);
@@ -550,6 +550,8 @@ public class Term implements Outputable {
 				/*
 				 * Parenthesis needs to follow
 				 */
+				
+				//TODO somewhere in here is a bug, 4^2 is 18 for some reason, probably the 2 is added after this. Will be fixed in next commit
 
 				String temp = getParenthesisString();
 				printlog("Test " + temp);
@@ -569,7 +571,7 @@ public class Term implements Outputable {
 		printlog("last buffering");
 		printlog("critical, buffer() in genPats()");
 
-		if (thisTimeCollect == MULT && lastTimeCollect == MULT) {
+		if (thisTimeCollect == collectTypes.MULT && lastTimeCollect == collectTypes.MULT) {
 
 			printlog("Times and times");
 			Term[] temp = new Term[lastParts.size()];
@@ -579,9 +581,9 @@ public class Term implements Outputable {
 
 			}
 
-			termParts.add(new Multiplikation(temp, Multiplikation.MULT));
+			termParts.add(new Multiplikation(temp, collectTypes.MULT));
 
-		} else if (thisTimeCollect == DIV && lastTimeCollect == DIV) {
+		} else if (thisTimeCollect == collectTypes.DIV && lastTimeCollect == collectTypes.DIV) {
 
 			printlog("Divide and divide.");
 			Term[] temp = new Term[lastParts.size()];
@@ -591,22 +593,22 @@ public class Term implements Outputable {
 
 			}
 
-		} else if (thisTimeCollect == MULT && lastTimeCollect != MULT) {
+		} else if (thisTimeCollect == collectTypes.MULT && lastTimeCollect != collectTypes.MULT) {
 
 			printlog("times and not times");
-			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, Multiplikation.MULT));
+			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, collectTypes.MULT));
 
-		} else if (thisTimeCollect == DIV && lastTimeCollect != DIV) {
+		} else if (thisTimeCollect == collectTypes.DIV && lastTimeCollect != collectTypes.DIV) {
 
 			printlog("divide and not divide.");
-			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, Multiplikation.DIV));
+			termParts.add(new Multiplikation(new Term[] { lastParts.get(0), lastParts.get(1) }, collectTypes.DIV));
 
-		} else if (thisTimeCollect == NO && lastTimeCollect == NO) {
+		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.NO) {
 
 			printlog("No and no.");
 			termParts.add(lastParts.get(0));
 
-		} else if (thisTimeCollect == NO && lastTimeCollect == MULT || thisTimeCollect == NO && lastTimeCollect == DIV) {
+		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.MULT || thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.DIV) {
 			
 			printlog("NO and MULT or DIV");
 			termParts.add(lastParts.get(0));

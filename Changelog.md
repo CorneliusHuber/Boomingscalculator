@@ -2,6 +2,7 @@
 ### What is new?
 
  - Little bugfix, until now objects after multiplikations would stay in the buffer of method genParts() and would therefore not be calculated.
+ - 
 
 ## Version 1.0.0 is out!
 ### What is new?
