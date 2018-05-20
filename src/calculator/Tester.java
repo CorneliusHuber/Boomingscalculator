@@ -18,8 +18,6 @@
 
 package calculator;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.Port;
-
 import analysis.*;
 import analysis.Number;
 import iOStreams.*;
