@@ -45,7 +45,7 @@ public class Tester implements Outputable {
 
 	Tester() {
 		
-		testExponentMult();
+		testeSin();
 		
 	}
 
@@ -124,7 +124,7 @@ public class Tester implements Outputable {
 		
 	}
 
-	private void testeExponent() {
+	private void testExponent() {
 
 		re = new Term("4^(2)");
 		re.calculate();

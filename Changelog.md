@@ -4,6 +4,7 @@
  - less Exceptions for incorrect input
  - Potences will also be allowed to look like this: 5^4 instead of just 5^(4)
  - Small refactoring
+ - lastTimeCollect, thisTimeCollect and selectoin are now instances of the enum collectTypes
 
 ## Version 1.0.0 is out!
 ### What is new?

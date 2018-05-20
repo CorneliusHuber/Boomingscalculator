@@ -20,26 +20,28 @@ package analysis;
 
 public class SinCosTan extends Term {
 	
-	public static char SINUS = 's';
-	public static char COSINUS = 'c';
-	public static char TANGENS = 't';
-	private static char ausgewählt;
+	public enum sinCosTanOption {
+		
+		SINUS, COSINUS, TANGENS
+		
+	};
+	private sinCosTanOption sinCosTanSelected;
 	private Parenthesis klammer;
 
-	public SinCosTan(String eingabe, char auswahl, short vz) { //Konstruktor
+	public SinCosTan(String eingabe, sinCosTanOption sinCosTanSelected, short vz) { //Konstruktor
 		
 		super();
 		stringTerm = eingabe;
 		algebraicSign = vz;
-		ausgewählt = auswahl;
+		this.sinCosTanSelected = sinCosTanSelected;
 		genParts();
 		printlog();
 		
-		if(ausgewählt == SINUS) {
+		if(this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
 			
 			printlog("Sinus erhalten: " + eingabe);
 			
-		} else if (ausgewählt == COSINUS) {
+		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
 			
 			printlog("Cosinus erhalten: " + eingabe);
 			
@@ -57,15 +59,15 @@ public class SinCosTan extends Term {
 		
 		String stringRev;
 		
-		if (ausgewählt == SINUS) {
+		if (this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
 			
 			stringRev = "sin(";
 		
-		} else if (ausgewählt == COSINUS) {
+		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
 			
 			stringRev = "cos(";
 			
-		} else if (ausgewählt == TANGENS) {
+		} else if (this.sinCosTanSelected == this.sinCosTanSelected.TANGENS) {
 			
 			stringRev = "tan(";
 			
@@ -96,15 +98,15 @@ public class SinCosTan extends Term {
 		
 		result = 0;
 		
-		if (ausgewählt == SINUS) {
+		if (this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
 			
 			result = Math.sin(klammer.calculate())*algebraicSign; 
 			
-		} else if (ausgewählt == COSINUS) {
+		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
 			
 			result = Math.cos(klammer.calculate())*algebraicSign;
 			
-		} else if (ausgewählt == TANGENS) {
+		} else if (this.sinCosTanSelected == this.sinCosTanSelected.TANGENS) {
 			
 			result = Math.tan(klammer.calculate())*algebraicSign;
 			

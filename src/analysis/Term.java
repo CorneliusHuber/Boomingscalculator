@@ -236,15 +236,15 @@ public class Term implements Outputable {
 
 		if (substring.equals("sin")) {
 
-			buffer(new SinCosTan(contentParenthesis, SinCosTan.SINUS, nextAlgebraicSign));
+			buffer(new SinCosTan(contentParenthesis, SinCosTan.sinCosTanOption.SINUS, nextAlgebraicSign));
 
 		} else if (substring.equals("cos")) {
 
-			buffer(new SinCosTan(contentParenthesis, SinCosTan.COSINUS, nextAlgebraicSign));
+			buffer(new SinCosTan(contentParenthesis, SinCosTan.sinCosTanOption.COSINUS, nextAlgebraicSign));
 
 		} else if (substring.equals("tan")) {
 
-			buffer(new SinCosTan(contentParenthesis, SinCosTan.TANGENS, nextAlgebraicSign));
+			buffer(new SinCosTan(contentParenthesis, SinCosTan.sinCosTanOption.TANGENS, nextAlgebraicSign));
 
 		} else {
 
@@ -551,7 +551,7 @@ public class Term implements Outputable {
 
 					temp = getParenthesisString();
 					printlog("Exponent with a parenthesis.");
-					progress = progress + 2;
+					progress = progress + temp.length() +2;
 					lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
 				
 				} else if (analysator.isNumber(stringTerm.charAt(progress))) {
