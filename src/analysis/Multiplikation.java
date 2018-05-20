@@ -69,43 +69,53 @@ public class Multiplikation extends Term {
 	@Override
 	public String returnStringTerm() {
 
-		String rechnungsstring = termParts.get(0).returnStringTerm();
+		String termString = termParts.get(0).returnStringTerm();
 
 		for (int i = 1; i < termParts.size(); i++) {
 
 			if (selection == collectTypes.MULT) {
 
-				rechnungsstring = rechnungsstring + '*';
+				termString = termString + '*';
 
 			} else if (selection == collectTypes.DIV) {
 
-				rechnungsstring = rechnungsstring + '/';
+				termString = termString + '/';
 
 			} else {
 
-				printlog("Hier gibt es ein größeres Problem mit gebeRechnungaus() in MalRechnung.");
+				printlog("There is a major problem in returnStringTerm() in Multiplikation.");
 
 			}
 
-			rechnungsstring = rechnungsstring + termParts.get(i).returnStringTerm();
+			termString = termString + termParts.get(i).returnStringTerm();
 
 		}
 
-		return rechnungsstring;
+		return termString;
 
 	}
 
 	@Override
 	public String returnStringTermReverse() {
+		
+		String stringRev = termParts.get(0).returnStringTermReverse();
+		
+		for (int i = 1 /*yes 1*/; i < termParts.size(); i++) {
+			
+			if (selection == MULT) {
+				
+				stringRev = stringRev + "*" + termParts.get(i).returnStringTermReverse();
+				
+			} else {
+				
+				stringRev = stringRev + "/" + termParts.get(i).returnStringTermReverse();
+				
+			}
+			
+		}
+		
 
-		/*
-		 * Kurzer Kommentar dazu: Hier kann man keinen String bekommen, weil man keinen
-		 * String übergeben bekommt, darum muss man in gebeRechnungaus() genau das selbe
-		 * machen wie hier deshalb verleihe ich dem dieser Methode nur einen anderen
-		 * Anstrich.
-		 */
-
-		return returnStringTerm();
+		return stringRev;
 
 	}
 

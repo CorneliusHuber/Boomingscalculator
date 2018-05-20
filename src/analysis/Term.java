@@ -31,7 +31,8 @@ public class Term implements Outputable {
 	protected Analysator analysator = new Analysator();
 	protected double result = 0;
 	protected short algebraicSign = 1; // if negativ -1, else +1
-	protected Parenthesis exponent;
+	//Exponent can now be a term
+	protected Term exponent;
 	private int progress = 0;
 	protected enum collectTypes {
 			NO, MULT, DIV
@@ -118,7 +119,7 @@ public class Term implements Outputable {
 			return stringTerm;
 
 		} else {
- 
+
 			return "Error: stringTerm == null. (This should never happen. :()";
 
 		}
@@ -160,7 +161,7 @@ public class Term implements Outputable {
 
 	}
 
-	public void setExponent(Parenthesis ex) {
+	public void setExponent(Term ex) {
 
 		if (exponent == null) {
 
@@ -172,11 +173,13 @@ public class Term implements Outputable {
 
 		}
 	}
+	
+
 
 	private void delWhiteSpaces() {
 
 		stringTerm = sU.removeall(stringTerm, ' ');
-		
+
 	}
 
 	public double calculate() {
@@ -254,7 +257,7 @@ public class Term implements Outputable {
 
 	private void genNumber() {
 
-		printlog("Number found()");
+		printlog("Number found");
 
 		String stringNumber = getNumberString();
 
@@ -462,18 +465,13 @@ public class Term implements Outputable {
 
 		while (progress < stringTerm.length()) {
 
-			// Case 1: einfache Zahl
 			if (analysator.isNumber(stringTerm.charAt(progress))) {
 
 				printlog("Number at " + progress);
 				genNumber();
 				printlog("Finished genNumber()");
 
-			}
-
-			// Case 2: sin,cos,tan
-
-			else if (analysator.isSinCosTan(stringTerm, progress)) {
+			} else if (analysator.isSinCosTan(stringTerm, progress)) {
 
 				printlog("Sin/Cos/Tan at " + progress);
 				genSinCosTan();
@@ -482,17 +480,13 @@ public class Term implements Outputable {
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 1) {
 
 				printlog("nthRoot at " + progress);
-
 				genNthRoot();
-
 				printlog("Finished genNthRoot()");
 
 			} else if (analysator.isAnyRoot(stringTerm, progress) == 0) {
 
 				printlog("Root at " + progress);
-
 				genRoot();
-
 				printlog("Finished genRoot()");
 
 			} else if (stringTerm.charAt(progress) == '(') {
@@ -553,10 +547,22 @@ public class Term implements Outputable {
 				
 				//TODO somewhere in here is a bug, 4^2 is 18 for some reason, probably the 2 is added after this. Will be fixed in next commit
 
-				String temp = getParenthesisString();
-				printlog("Test " + temp);
-				lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
-				printlog("Exponent abgeschlossen, mache weiter in genTeile()");
+				String temp;
+				
+				if (stringTerm.charAt(progress) == '(') {
+
+					temp = getParenthesisString();
+					printlog("Test " + temp);
+					lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
+					printlog("Exponent abgeschlossen, mache weiter in genTeile()");
+				
+				} else if (analysator.isNumber(stringTerm.charAt(progress))) {
+					
+					temp = getNumberString();
+					printlog("Exponent with just a number");
+					lastParts.get(lastParts.size() - 1).setExponent(new Number(temp));
+					
+				}
 
 			} else {
 
@@ -566,8 +572,8 @@ public class Term implements Outputable {
 			}
 		}
 
-		//Buffering the last time, a bit different then the other iterations.
-		
+		// Buffering the last time, a bit different then the other iterations.
+
 		printlog("last buffering");
 		printlog("critical, buffer() in genPats()");
 
@@ -609,6 +615,7 @@ public class Term implements Outputable {
 			termParts.add(lastParts.get(0));
 
 		} else if (thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.MULT || thisTimeCollect == collectTypes.NO && lastTimeCollect == collectTypes.DIV) {
+
 			
 			printlog("NO and MULT or DIV");
 			termParts.add(lastParts.get(0));
@@ -617,11 +624,11 @@ public class Term implements Outputable {
 
 		else {
 
-			printlog("Foregot a case in here!!!");
+			printlog("Foregot a case in here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 		}
 
-		printlog("feddig.");  //German dialect, states that the method has finished.
+		printlog("feddig."); // German dialect, states that the method has finished.
 
 	}
 }
