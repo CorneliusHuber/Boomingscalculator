@@ -102,7 +102,7 @@ public class Multiplikation extends Term {
 		
 		for (int i = 1 /*yes 1*/; i < termParts.size(); i++) {
 			
-			if (selection == MULT) {
+			if (selection == collectTypes.MULT) {
 				
 				stringRev = stringRev + "*" + termParts.get(i).returnStringTermReverse();
 				
