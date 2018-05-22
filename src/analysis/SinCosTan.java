@@ -26,28 +26,28 @@ public class SinCosTan extends Term {
 		
 	};
 	private sinCosTanOption sinCosTanSelected;
-	private Parentheses klammer;
+	private Parentheses parentheses;
 
-	public SinCosTan(String eingabe, sinCosTanOption sinCosTanSelected, short vz) { //Konstruktor
+	public SinCosTan(String input, sinCosTanOption sinCosTanSelected, short arithmeticOperator) {
 		
 		super();
-		stringTerm = eingabe;
-		algebraicSign = vz;
+		stringTerm = input;
+		algebraicSign = arithmeticOperator;
 		this.sinCosTanSelected = sinCosTanSelected;
 		genParts();
 		printlog();
 		
-		if(this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
+		if(this.sinCosTanSelected == sinCosTanOption.SINUS) {
 			
-			printlog("Sinus erhalten: " + eingabe);
+			printlog("Sinus received: " + input);
 			
-		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
+		} else if (this.sinCosTanSelected == sinCosTanOption.COSINUS) {
 			
-			printlog("Cosinus erhalten: " + eingabe);
+			printlog("Cosinus received: " + input);
 			
 		} else  {
 			
-			printlog("Tangens erhalten " + eingabe);
+			printlog("Tangens received " + input);
 			
 		}
 		unindent();
@@ -59,27 +59,27 @@ public class SinCosTan extends Term {
 		
 		String stringRev;
 		
-		if (this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
+		if (this.sinCosTanSelected == sinCosTanOption.SINUS) {
 			
 			stringRev = "sin(";
 		
-		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
+		} else if (this.sinCosTanSelected == sinCosTanOption.COSINUS) {
 			
 			stringRev = "cos(";
 			
-		} else if (this.sinCosTanSelected == this.sinCosTanSelected.TANGENS) {
+		} else if (this.sinCosTanSelected == sinCosTanOption.TANGENS) {
 			
 			stringRev = "tan(";
 			
 		} else {
 			
 			stringRev = "";
-			printlog("Hier ist nichts ausgewählt. gebeRechnungsTeileaus() in SinCosTan");
+			//Can just be the upper three cases, this is for the compiler.
 			
 		}
 		
 		
-		stringRev = stringRev + klammer.returnStringTerm();
+		stringRev = stringRev + parentheses.returnStringTerm();
 		
 		stringRev = stringRev + ")";
 		
@@ -98,17 +98,17 @@ public class SinCosTan extends Term {
 		
 		result = 0;
 		
-		if (this.sinCosTanSelected == this.sinCosTanSelected.SINUS) {
+		if (this.sinCosTanSelected == sinCosTanOption.SINUS) {
 			
-			result = Math.sin(klammer.calculate())*algebraicSign; 
+			result = Math.sin(parentheses.calculate())*algebraicSign; 
 			
-		} else if (this.sinCosTanSelected == this.sinCosTanSelected.COSINUS) {
+		} else if (this.sinCosTanSelected == sinCosTanOption.COSINUS) {
 			
-			result = Math.cos(klammer.calculate())*algebraicSign;
+			result = Math.cos(parentheses.calculate())*algebraicSign;
 			
-		} else if (this.sinCosTanSelected == this.sinCosTanSelected.TANGENS) {
+		} else if (this.sinCosTanSelected == sinCosTanOption.TANGENS) {
 			
-			result = Math.tan(klammer.calculate())*algebraicSign;
+			result = Math.tan(parentheses.calculate())*algebraicSign;
 			
 		}
 		
@@ -120,7 +120,7 @@ public class SinCosTan extends Term {
 	@Override
 	protected void genParts(){
 		
-		klammer = new Parentheses(stringTerm);
+		parentheses = new Parentheses(stringTerm);
 		
 	}
 	
