@@ -44,8 +44,8 @@ public class Tester implements Outputable {
 	}
 
 	Tester() {
-		
-		testeSin();
+	    
+		testKlammer();
 		
 	}
 
@@ -63,7 +63,7 @@ public class Tester implements Outputable {
 		
 	}
 
-	private void testeSinfunkt() {
+	private void testSinfunkt() {
 
 		String rechnung = "cos(3.14)";
 
@@ -74,7 +74,7 @@ public class Tester implements Outputable {
 
 	}
 
-	private void testeWurzelfunkt() {
+	private void testWurzelfunkt() {
 		
 		String rechnung = "V(45)+ 4";
 		//ana = new Analysator();
@@ -84,7 +84,7 @@ public class Tester implements Outputable {
 
 	}
 
-	private void testeWurzelFunktuPlus() {
+	private void testWurzelFunktuPlus() {
 
 		String rechnung = "V(45)+2";
 		ana = new Analysator();
@@ -94,7 +94,7 @@ public class Tester implements Outputable {
 
 	}
 	
-	private void testeWurzelFunktuMinus() {
+	private void testRootFunctMinus() {
 		
 		String rechnung = "V(45)-28";
 		ana = new Analysator();
@@ -104,23 +104,18 @@ public class Tester implements Outputable {
 		
 	}
 	
-	private void testeSin() {
+	private void testSin() {
 		
-		String rechnung = "sin(90) * 4";
-		re = new Term(rechnung);
+		re = new Term("sin(90) * 4");
 		re.calculate();
 		
 	}
 	
-	private void testeKlammer() {
+	private void testKlammer() {
 		
-		String rechnung = "(13*5/3+17-10+6) + (84) + 7";
-		//rechnung = "(13*5/3+17-10+6)";
-		//rechnung = "(13*5/3)";
-		//rechnung = "(13*5)";
-		//rechnung = "13*5";
-		re = new Term(rechnung);
+		re = new Term("(13*5/3+17-10+6) + (84) + 7");
 		re.calculate();
+		System.out.println(re.returnStringTermReverse());
 		
 	}
 
@@ -131,21 +126,14 @@ public class Tester implements Outputable {
 
 	}
 	
-	private void probiereExponent() {
-		
-		String rechnung = "25^(3)";
-		re = new Term(rechnung);
-		re.calculate();
-	}
-	
-	private void probiereGleitkommaZahl() {
+	private void testFloat() {
 		
 		Number z = new Number("1.55", (short) (1));
 		System.out.println(z.calculate());
 		
 	}
 	
-	private void testeGleitkommaZahl() {
+	private void testLFloatInSum() {
 		
 		re = new Term("1.55+27+V(1+7)");
 		re.calculate();
@@ -233,8 +221,8 @@ public class Tester implements Outputable {
 	
 	public void instanceoftest() {
 		
-		re = new Parenthesis("24");
-		System.out.println(re instanceof Parenthesis);
+		re = new Parentheses("24");
+		System.out.println(re instanceof Parentheses);
 		
 	}
 	

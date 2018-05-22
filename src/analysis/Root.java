@@ -20,7 +20,7 @@ package analysis;
 
 public class Root extends Term {
 
-	private Parenthesis klammer;
+	private Parentheses parentheses;
 	private Number nte;
 
 	public Root(String eingabe, short vz) {
@@ -72,7 +72,7 @@ public class Root extends Term {
 
 		String rechnungrev = "V(";
 
-		rechnungrev = rechnungrev + klammer.returnStringTermReverse();
+		rechnungrev = rechnungrev + parentheses.returnStringTermReverse();
 
 		rechnungrev = rechnungrev + ")";
 
@@ -85,7 +85,7 @@ public class Root extends Term {
 
 		// Hier muss dafür gesorgt werde, dass da nichts negatives ist.
 
-		result = klammer.calculate();
+		result = parentheses.calculate();
 
 		if (result < 0) {
 
@@ -121,7 +121,7 @@ public class Root extends Term {
 	@Override
 	protected void genParts() {
 
-		klammer = new Parenthesis(stringTerm);
+		parentheses = new Parentheses(stringTerm);
 
 	}
 

@@ -18,6 +18,8 @@
 
 package analysis;
 
+import calculator.LogicException;
+
 public class Multiplikation extends Term {
 
 	private collectTypes selection;
@@ -122,17 +124,14 @@ public class Multiplikation extends Term {
 	@Override
 	public double calculate() {
 
-		double ergebnis = termParts.get(0).calculate();
+		double result = termParts.get(0).calculate();
 
 		if (selection == collectTypes.MULT) {
 
 			for (int i = 1; i < termParts.size(); i++) {
-				/*
-				 * Hier ist das 1, weil der Teil 0 bereits ausgerechnet wurde und in ergebnis
-				 * steht.
-				 */
+				//0 has already been claculated
 
-				ergebnis *= termParts.get(i).calculate();
+				result *= termParts.get(i).calculate();
 				printlog("Division calculated.");
 
 			}
@@ -140,23 +139,16 @@ public class Multiplikation extends Term {
 		} else if (selection == collectTypes.DIV) {
 
 			for (int i = 1; i < termParts.size(); i++) {
-				/*
-				 * Hier ist das 1, weil der Teil 0 bereits ausgerechnet wurde und in ergebnis
-				 * steht.
-				 */
+				//0 has already been calculated
 
-				ergebnis /= termParts.get(i).calculate();
+				result /= termParts.get(i).calculate();
 				printlog("Dvision calculated.");
 
 			}
 
-		} else {
-
-			printlog("Obacht beim ausrechenn der Mal/Geteiltrechnung hat es wohl einen Fehler gegeben.");
-
 		}
 
-		return ergebnis;
+		return result;
 
 	}
 

@@ -18,16 +18,15 @@
 
 package calculator;
 
-@Deprecated
-public class NichtRechenbarException extends Exception {
+public class LogicException extends Exception {
 	
-	public NichtRechenbarException() {
+	public LogicException() {
 		
-		super("Das hier ist nicht Rechenbar. Vllt bei der Wurzel kleiner als 0?");
+		super("Unable to calculate.");
 		
 	}
 	
-	public NichtRechenbarException(String text) {
+	public LogicException(String text) {
 		
 		super(text);
 		

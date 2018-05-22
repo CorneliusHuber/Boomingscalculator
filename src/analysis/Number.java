@@ -19,102 +19,90 @@
 package analysis;
 
 public class Number extends Term {
-	
-	
+
 	/**
-	 * Konstruktor von Zahl. Hier jetzt kein genTeile(), da man nur noch beim Ausrechnen
-	 * den String in eine Zahl umwandeln muss.
-	 * @param eingabe
+	 * Constructor of Number. No genParts() needed. This is done during calculate().
+	 * 
+	 * @param input
 	 * @param vz
 	 */
-	public Number(String eingabe, short vz) {
-		
+	public Number(String input, short vz) {
+
 		super();
-		stringTerm = eingabe;
+		stringTerm = input;
 		algebraicSign = vz;
-		printlog("Konstruktor der Zahl " + (Double.parseDouble(eingabe) * vz) + " ist fertig.");
+		printlog("Konstruktor der Zahl " + (Double.parseDouble(input) * vz) + " ist fertig.");
 		printlog();
 		unindent();
 	}
-	
-	
+
 	/**
-	 * Für den Fall, dass man wie bei der Wurel nur noch einen Konstruktor braucht.
-	 * Dieser Konstruktor ist auch silent, was aber nicht heißt, dass es silent ist, 
-	 * hier ausrechnen() aufzurufen.
-	 * @param eingabe
+	 * This constructor is kept for efficiency, it is being used by Term and Root
+	 * 
+	 * @param input
 	 */
-	public Number(String eingabe) {
-		
+	public Number(String input) {
+
 		super();
-		stringTerm = eingabe;
+		stringTerm = input;
 		unindent();
-		
+
 	}
-	
+
 	@Override
 	public String returnStringTerm() {
-		
+
 		return stringTerm;
-		
+
 	}
-	
-	/**
-	 * Hier wird zuerst der String genommen und dann wieder zurück gerechnet, um zu
-	 * vermeiden, dass hier ein ungültiger String dabei ist. Könnte eine Exception werfen.
-	 */
+
+
 	@Override
 	public String returnStringTermReverse() {
-		
-		double ergebnis = Double.parseDouble(stringTerm);
-		
-		String stringrev = Double.toString(ergebnis);
-		
-		if (ergebnis < 0) {
-			
-			stringrev = "(-" + stringrev;
-			
+
+		double result = Double.parseDouble(stringTerm);
+
+		String stringRev = Double.toString(result);
+
+		if (result < 0) {
+
+			stringRev = "(-" + stringRev;
+
 		} else {
-			
-			stringrev = "(+" + stringrev;
-			
+
+			stringRev = "(+" + stringRev;
+
 		}
-		
-		stringrev = stringrev + ")";
-		
+
+		stringRev = stringRev + ")";
+
 		if (exponent != null) {
-			
-			stringrev = stringrev + "^" + exponent.returnStringTermReverse();
-			
+
+			stringRev = stringRev + "^" + exponent.returnStringTermReverse();
+
 		}
-		
-		return stringrev;
-		
+
+		return stringRev;
+
 	}
-	
+
 	@Override
 	public double calculate() {
-		
+
 		try {
-			
-			result = Double.parseDouble(stringTerm)*algebraicSign;
-			printlog("Ergebnis ohne Exponent ist " + result);
-			printlog("Exponent stringrechnung ist: ");
-			returnExponent();
+
+			result = Double.parseDouble(stringTerm) * algebraicSign;
 			calculateExponent();
-			printlog("Exponent ausgerechnet, Ergebnis: " + result);
 			return result;
-			
+
 		} catch (Exception e) {
-			
+
 			System.out.println(e);
 			e.printStackTrace();
-			return 1; //für den Fall, dass...
-			
-			
+			return 1; // In case...
+
 		}
-		
-		
+
 	}
-	
+
 }

@@ -19,19 +19,19 @@
 package analysis;
 
 
-public class Parenthesis extends Term {
+public class Parentheses extends Term {
 	
 	
-	public Parenthesis(String eingabe, short vz) {
+	public Parentheses(String input, short vz) {
 		
-		super(eingabe);
+		super(input);
 		algebraicSign = vz;
 		unindent();
 	}
 	
-	public Parenthesis(String eingabe) {
+	public Parentheses(String input) {
 		
-		super(eingabe);
+		super(input);
 		printlog();
 		printlog();
 		
@@ -40,16 +40,12 @@ public class Parenthesis extends Term {
 	@Override
 	public String returnStringTermReverse() {
 		
-		String rechnungrev = "(";
+		String stringRev = "(";
 		
-		for(Term rechnungsteil: termParts) {
-			
-			rechnungrev = rechnungrev + rechnungsteil.returnStringTermReverse();
-			
-		}
+		stringRev = stringRev + super.returnStringTermReverse();
 		
-		rechnungrev = rechnungrev + ")";
-		return rechnungrev;
+		stringRev = stringRev + ")";
+		return stringRev;
 		
 		
 	}

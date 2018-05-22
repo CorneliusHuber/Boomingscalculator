@@ -317,7 +317,7 @@ public class Term implements Outputable {
 
 		printlog("Parenthesis found");
 		String contentParenthesis = getParenthesisString();
-		buffer(new Parenthesis(contentParenthesis, nextAlgebraicSign));
+		buffer(new Parentheses(contentParenthesis, nextAlgebraicSign));
 		progress = progress + contentParenthesis.length() + 2;
 
 	}
@@ -552,7 +552,7 @@ public class Term implements Outputable {
 					temp = getParenthesisString();
 					printlog("Exponent with a parenthesis.");
 					progress = progress + temp.length() +2;
-					lastParts.get(lastParts.size() - 1).setExponent(new Parenthesis(temp));
+					lastParts.get(lastParts.size() - 1).setExponent(new Parentheses(temp));
 				
 				} else if (analysator.isNumber(stringTerm.charAt(progress))) {
 					

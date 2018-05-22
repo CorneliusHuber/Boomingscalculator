@@ -26,7 +26,7 @@ public class SinCosTan extends Term {
 		
 	};
 	private sinCosTanOption sinCosTanSelected;
-	private Parenthesis klammer;
+	private Parentheses klammer;
 
 	public SinCosTan(String eingabe, sinCosTanOption sinCosTanSelected, short vz) { //Konstruktor
 		
@@ -120,7 +120,7 @@ public class SinCosTan extends Term {
 	@Override
 	protected void genParts(){
 		
-		klammer = new Parenthesis(stringTerm);
+		klammer = new Parentheses(stringTerm);
 		
 	}
 	
