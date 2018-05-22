@@ -18,7 +18,7 @@
 
 package calculator;
 
-public class StaticMathe {
+public class StaticMaths {
 	
 	public static final double pi = 3.1415926535897;
 	

@@ -18,8 +18,6 @@
 
 package analysis;
 
-import calculator.LogicException;
-
 public class Multiplikation extends Term {
 
 	private collectTypes selection;

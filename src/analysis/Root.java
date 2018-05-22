@@ -21,13 +21,13 @@ package analysis;
 public class Root extends Term {
 
 	private Parentheses parentheses;
-	private Number nte;
+	private Number nth;
 
-	public Root(String eingabe, short vz) {
+	public Root(String input, short arithmeticOperator) {
 
 		super();
-		stringTerm = eingabe;
-		algebraicSign = vz;
+		stringTerm = input;
+		algebraicSign = arithmeticOperator;
 		printlog("Klammer wird erstellt.");
 		genParts();
 		returnStringTerm();
@@ -37,21 +37,31 @@ public class Root extends Term {
 	}
 
 	/**
-	 * Momentan kann das hier noch keine Gleitkommazahlen als nte Wurzel
-	 * haendeln. Das muss noch implementiert werden.
+	 * Momentan kann das hier noch keine Gleitkommazahlen als nte Wurzel haendeln.
+	 * Das muss noch implementiert werden.
 	 * 
 	 * @param eingabe
 	 * @param nte
 	 * @param vz
 	 */
-	public Root(String eingabe, String nte, short vz) {
+
+	/**
+	 * Having an nth Root in which nth is not a natural number would not match to
+	 * the arguments of StaticMaths.root, therefore the number is parsed to an int
+	 * later on.
+	 * 
+	 * @param input
+	 * @param nth
+	 * @param arithmeticOperator
+	 */
+	public Root(String input, String nth, short arithmeticOperator) {
 
 		super();
-		stringTerm = eingabe;
-		algebraicSign = vz;
-		printlog("Klammer wird erstellt.");
+		stringTerm = input;
+		algebraicSign = arithmeticOperator;
+		printlog("Root is being made.");
 		genParts();
-		this.nte = new Number(nte);
+		this.nth = new Number(nth);
 		returnExponent();
 		printlog();
 		unindent();
@@ -61,8 +71,6 @@ public class Root extends Term {
 	@Override
 	public String returnStringTerm() {
 
-		// Auto-generated method stub
-		printlog("Inhalt: " + stringTerm);
 		return stringTerm;
 
 	}
@@ -70,50 +78,41 @@ public class Root extends Term {
 	@Override
 	public String returnStringTermReverse() {
 
-		String rechnungrev = "V(";
+		String strinRev = "V(";
 
-		rechnungrev = rechnungrev + parentheses.returnStringTermReverse();
+		strinRev = strinRev + parentheses.returnStringTermReverse();
 
-		rechnungrev = rechnungrev + ")";
+		strinRev = strinRev + ")";
 
-		return rechnungrev;
+		return strinRev;
 
 	}
 
 	@Override
 	public double calculate() {
 
-		// Hier muss dafür gesorgt werde, dass da nichts negatives ist.
-
 		result = parentheses.calculate();
 
 		if (result < 0) {
 
 			/*
-			 * Kurzer Erklärung hierzu: Ich kann keine normale Exception werfen,
-			 * denn die wird dann gleich gefangen. Hier kann ich dann das
-			 * Problem umgehen, indem ich sie nicht fangen muss.
+			 * This exception needs to be uncatched until someone really uses the lib.
 			 */
-
-			throw new RuntimeException("Ergebnis in Wuzel kleiner als null.");
+			throw new RuntimeException("Term under Root < 0.");
 
 		}
 
-		printlog("Rechne Wurzel aus");
+		if (nth == null) {
 
-		if (nte == null) {
-			
-			result = calculator.StaticMathe.wurzelziehen(result, 5) * algebraicSign;
-			
+			result = calculator.StaticMaths.wurzelziehen(result, 5) * algebraicSign;
+
 		} else {
-			
-			result = calculator.StaticMathe.wurzelziehen(result, 5, (int) nte.calculate());
-			
+
+			result = calculator.StaticMaths.wurzelziehen(result, 5, (int) nth.calculate());
+
 		}
-		
-		printlog("Wurzel erfolgreich ausgerechnet.");
+
 		calculateExponent();
-		printlog("Exponent ausgerechnet, Ergebnis: " + result);
 		return result;
 
 	}

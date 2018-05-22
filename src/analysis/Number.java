@@ -24,14 +24,14 @@ public class Number extends Term {
 	 * Constructor of Number. No genParts() needed. This is done during calculate().
 	 * 
 	 * @param input
-	 * @param vz
+	 * @param arithmeticOperator
 	 */
-	public Number(String input, short vz) {
+	public Number(String input, short arithmeticOperator ) {
 
 		super();
 		stringTerm = input;
-		algebraicSign = vz;
-		printlog("Konstruktor der Zahl " + (Double.parseDouble(input) * vz) + " ist fertig.");
+		algebraicSign = arithmeticOperator;
+		printlog("Konstruktor der Zahl " + (Double.parseDouble(input) * arithmeticOperator) + " ist fertig.");
 		printlog();
 		unindent();
 	}
