@@ -1,6 +1,6 @@
 /**
  *  This file is part of BoomingsCalculator
- *  Copyright (C) 2018  <name of author>
+ *  Copyright (C) 2018  Cornelius Huber
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +14,11 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see https://www.gnu.org/licenses/gpl.html.
+ *  
+ *  
+ *  
+ *  If this class is implemented, it can use the Output class
+ *  
  */
 
 package iOStreams;

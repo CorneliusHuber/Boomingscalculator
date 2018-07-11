@@ -1,6 +1,6 @@
 /**
  *  This file is part of BoomingsCalculator
- *  Copyright (C) 2018  <name of author>
+ *  Copyright (C) 2018  Cornelius Huber
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ package iOStreams;
 public class Output{
 
 	private static boolean extendedlog = false;
-	private static int leerzeichen = 0;
-	private static int einrueckung = 5;
+	private static int spaces = 0;
+	private static int indention = 5;
 	
 	public static void setextendedlog(boolean b) {
 		
@@ -34,7 +34,7 @@ public class Output{
 		
 		if (extendedlog) {
 			
-			System.out.println(verarbString(log));
+			System.out.println(processString(log));
 			
 		}
 		
@@ -44,7 +44,7 @@ public class Output{
 		
 		if (extendedlog) {
 			
-			System.out.println(verarbChar(log));
+			System.out.println(processChar(log));
 			
 		}
 		
@@ -71,8 +71,8 @@ public class Output{
 	}
 	
 	public static void printImp(String imp) {
-		//Hier wird wichtiges ausgegeben
-		System.out.println(verarbString(imp));
+		
+		System.out.println(processString(imp));
 		
 	}
 	
@@ -83,48 +83,48 @@ public class Output{
 		
 	}
 	
-	public static String verarbString(String verarb) {
+	public static String processString(String process) {
 
-		int leerzeichenhier = leerzeichen; 
-		String anfang = "";
-		while (leerzeichenhier > 0) {
+		int spaceshere = spaces; 
+		String begin = "";
+		while (spaceshere > 0) {
 			
-			anfang = anfang + " ";
-			leerzeichenhier--;
+			begin = begin + " ";
+			spaceshere--;
 			
 		}
-		verarb = anfang + verarb;
+		process = begin + process;
 		
-		return verarb;
+		return process;
 		
 	}
 	
-	public static String verarbChar(char verarb) {
+	public static String processChar(char process) {
 		
-		int leerzeichenhier = leerzeichen;
-		String anfang = "";
-		while (leerzeichenhier > 0 ) {
+		int spaceshere = spaces;
+		String begin = "";
+		while (spaceshere > 0 ) {
 			
-			anfang = anfang + " ";
-			leerzeichenhier --;
+			begin = begin + " ";
+			spaceshere --;
 			
 		}
-		anfang = anfang + verarb;
+		begin = begin + process;
 		
-		return anfang;
+		return begin;
 		
 		
 	}
 	
 	public static void indent() {
 		
-		leerzeichen += einrueckung;
+		spaces += indention;
 		
 	}
 	
 	public static void unindent() {
 		
-		leerzeichen -= einrueckung;
+		spaces -= indention;
 	
 	}
 	
